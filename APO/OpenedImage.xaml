@@ -1,0 +1,35 @@
+﻿<Window x:Class="APO.OpenedImage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:APO"
+        mc:Ignorable="d"
+        Title="OpenedImage" Height="500" Width="800" Activated="Window_Activated">
+    <Grid>
+        <Menu>
+            <MenuItem Header="Tools"></MenuItem>
+            <MenuItem Header="Image">
+                <MenuItem x:Name="DuplicateWindow" Header="Duplicate" Click="DuplicateWindow_Click"/>
+                <MenuItem Header="Type">
+                    <MenuItem Header="Grayscale" x:Name="Grayscale" Click="Grayscale_Click"/>
+                    <MenuItem Header="HSV" x:Name="HSV" Click="HSV_Click"/>
+                    <MenuItem Header="Lab" x:Name="Lab" Click="Lab_Click"/>
+                    <Separator/>
+                    <MenuItem Header="3 HSV Channels" x:Name="ThreeHSVChannels" Click="ThreeHSVChannels_Click"/>
+                    <MenuItem Header="3 LAB Channels" x:Name="ThreeLABChannels" Click="ThreeLABChannels_Click"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Analyze">
+                <MenuItem Header="Histogram" x:Name="Histogram" Click="Histogram_Click"/>
+                <MenuItem Header="Plot Profile" x:Name="PlotProfile" Click="PlotProfile_Click"/>
+            </MenuItem>
+            <MenuItem Header="Process">
+                <MenuItem Header="Histogram Stretch" x:Name="HistogramStretch" Click="HistogramStretch_Click"/>
+                <MenuItem Header="NOR - negation" x:Name="NOR" Click="Negation_Click"/>
+            </MenuItem>
+        </Menu>
+        <Image x:Name="imageSquare" Margin="35,45,38,27"/>
+        <Line x:Name="PlotProfileLine" Stroke="Yellow" StrokeThickness="3" Visibility="Hidden"/>
+    </Grid>
+</Window>

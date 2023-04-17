@@ -1,0 +1,97 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Emgu;
+using Emgu.CV;
+using Emgu.CV.Structure;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using Emgu.CV.ImgHash;
+using System.Drawing;
+
+namespace APO
+{
+    class Lab2
+    {
+        public static Image<Bgr, byte> Equalization(Image<Bgr, byte> image, int minValue, int maxValue)
+        {
+            Image<Bgr, byte> result = image.Clone();
+            Image<Gray, byte>[] channels = image.Split();
+
+            for (int channel = 0; channel < 3; channel++)
+            {
+                var currentChannel = channels[channel];
+                double[] minVal = new double[1];
+                double[] maxVal = new double[1];
+                System.Drawing.Point[] minLoc = new System.Drawing.Point[1];
+                System.Drawing.Point[] maxLoc = new System.Drawing.Point[1];
+                currentChannel.MinMax(out minVal, out maxVal, out minLoc, out maxLoc);
+                currentChannel._EqualizeHist();
+                CvInvoke.Normalize(currentChannel, currentChannel, 0, 255, Emgu.CV.CvEnum.NormType.MinMax);
+
+                // Copy the processed channel back to the corresponding channel in the result image
+                CvInvoke.InsertChannel(currentChannel, result, channel);
+            }
+            return result;
+        }
+
+        public static BitmapSource InvertColors(BitmapSource source)
+        {
+            int width = source.PixelWidth;
+            int height = source.PixelHeight;
+
+            // Convert the image to a grayscale format with 8 bits per pixel
+            FormatConvertedBitmap grayscaleImage = new FormatConvertedBitmap();
+            grayscaleImage.BeginInit();
+            grayscaleImage.Source = source;
+            grayscaleImage.DestinationFormat = PixelFormats.Gray8;
+            grayscaleImage.EndInit();
+
+            // Invert the colors
+            int bytesPerPixel = 1;
+            int stride = width * bytesPerPixel;
+            byte[] pixelData = new byte[height * stride];
+
+            grayscaleImage.CopyPixels(pixelData, stride, 0);
+
+            for (int i = 0; i < pixelData.Length; i++)
+            {
+                pixelData[i] = (byte)(255 - pixelData[i]);
+            }
+
+            return BitmapSource.Create(width, height, grayscaleImage.DpiX, grayscaleImage.DpiY, PixelFormats.Gray8, null, pixelData, stride);
+        }
+
+        public static Image<Bgr, byte> HistogramStretching(Image<Bgr, byte> inputImage, double minRange, double maxRange)
+        {
+            if (inputImage == null)
+                return null;
+
+            Image<Bgr, byte> outputImage = inputImage.Clone();
+            double[] minVal, maxVal;
+            Point[] minLoc, maxLoc;
+            inputImage.MinMax(out minVal, out maxVal, out minLoc, out maxLoc);
+
+            double scaleFactor = (maxRange - minRange) / (maxVal[0] - minVal[0]);
+            double offset = minRange - scaleFactor * minVal[0];
+
+            for (int y = 0; y < inputImage.Rows; y++)
+            {
+                for (int x = 0; x < inputImage.Cols; x++)
+                {
+                    Bgr currentPixel = inputImage[y, x];
+                    Bgr newPixel = new Bgr();
+                    newPixel.Blue = Math.Min(Math.Max(currentPixel.Blue * scaleFactor + offset, minRange), maxRange);
+                    newPixel.Green = Math.Min(Math.Max(currentPixel.Green * scaleFactor + offset, minRange), maxRange);
+                    newPixel.Red = Math.Min(Math.Max(currentPixel.Red * scaleFactor + offset, minRange), maxRange);
+
+                    outputImage[y, x] = newPixel;
+                }
+            }
+
+            return outputImage;
+        }
+    }
+}

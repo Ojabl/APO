@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APO", "APO\APO.csproj", "{F4311FE6-4833-47AD-B7C4-B2F49192508B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F4311FE6-4833-47AD-B7C4-B2F49192508B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4311FE6-4833-47AD-B7C4-B2F49192508B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4311FE6-4833-47AD-B7C4-B2F49192508B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4311FE6-4833-47AD-B7C4-B2F49192508B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D0C9306-F5A7-4201-A575-E009B9DAAFDE}
+	EndGlobalSection
+EndGlobal

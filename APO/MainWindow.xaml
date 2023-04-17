@@ -1,0 +1,19 @@
+﻿<Window x:Class="APO.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:APO"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="100" Width="800">
+    
+    <Grid>
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem x:Name="OpenImageMenuItem" Header="Open Image..." Click="OpenImageMenuItem_Click" />
+            </MenuItem>
+            <MenuItem Header="Info" x:Name="info" Click="info_Click"/>
+        </Menu>
+    </Grid>
+
+</Window>
