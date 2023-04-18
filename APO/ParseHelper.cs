@@ -1,21 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using Microsoft.Win32;
-using ScottPlot;
-using ScottPlot.WPF;
+
 namespace APO
 {
     class ParseHelper
@@ -43,12 +30,5 @@ namespace APO
             }
             return image;
         }
-
-        //public static Image<Gray, byte> ConvertMatToGrayEmguImage(Mat mat)
-        //{
-        //    Image<Gray, byte> outputImage = new Image<Bgr, byte>(mat.Width, mat.Height);
-        //    mat.CopyTo(outputImage);
-        //    return outputImage;
-        //}
     }
 }

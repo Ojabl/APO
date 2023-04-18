@@ -23,11 +23,11 @@ namespace APO
             InitializeComponent();
         }
 
-        private void applyButton_Click(object sender, RoutedEventArgs e)
+        private void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                int grayLevels = Int32.Parse(TbGrayLevels.Text.ToString());
+                int grayLevels = int.Parse(TbGrayLevels.Text.ToString());
 
                 if(grayLevels >= 0 && grayLevels <= 256 && grayLevels != 0)
                 {
@@ -41,10 +41,7 @@ namespace APO
                     posterizedImageWindow.Show();
                     posterizedImageWindow.image = new Image();
                 }
-                else
-                {
-                    MessageBox.Show("Please input valid data\nvalue must be from range 0 to 255.", "Invalid data error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                else MessageBox.Show("Please input valid data\nvalue must be from range 0 to 255.", "Invalid data error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch
             {

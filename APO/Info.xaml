@@ -5,14 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:APO"
         mc:Ignorable="d"
-        Title="Info" Height="230" Width="325">
+        Title="Info" Height="270" Width="350">
     <Grid>
-        <Label Content="APO projekt" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Autor: Oskar Jabłoński" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
-        <Label Content="Prowadzący: mgr inż. Łukasz Roszkowiak" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
-        <Label Content="Algorytmy Przetwarzania Obrazów - projekt" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top"/>
-        <Label Content="nr. albumu 19871, grupa ID06IO1" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top"/>
-        <Label Content="Informatyka Inżynieria Oprogramowania 2023" HorizontalAlignment="Left" Margin="10,144,0,0" VerticalAlignment="Top"/>
+        <Label Content="Projekt APO - Algorytmy przetwarzania obrazów" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Content="Autor:                                                      Oskar Jabłoński" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Width="306"/>
+        <Label Content="Prowadzący:                         mgr inż. Łukasz Roszkowiak" HorizontalAlignment="Center" Margin="0,76,0,0" VerticalAlignment="Top" Width="306"/>
+        <Label Content="nr. albumu 19871, grupa ID06IO1" HorizontalAlignment="Left" Margin="9,182,0,0" VerticalAlignment="Top"/>
+        <Label Content="WIT Informatyka &#xD;&#xA;Inżynieria Oprogramowania 2023&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,129,0,0" VerticalAlignment="Top" Height="53"/>
 
     </Grid>
 </Window>

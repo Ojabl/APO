@@ -3,12 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:APO"
         mc:Ignorable="d"
         Title="OpenedImage" Height="500" Width="800" Activated="Window_Activated">
     <Grid>
         <Menu>
-            <MenuItem Header="Tools"></MenuItem>
             <MenuItem Header="Image">
                 <MenuItem x:Name="DuplicateWindow" Header="Duplicate" Click="DuplicateWindow_Click"/>
                 <MenuItem Header="Type">
@@ -22,11 +20,14 @@
             </MenuItem>
             <MenuItem Header="Analyze">
                 <MenuItem Header="Histogram" x:Name="Histogram" Click="Histogram_Click"/>
+                <Separator/>
                 <MenuItem Header="Plot Profile" x:Name="PlotProfile" Click="PlotProfile_Click"/>
             </MenuItem>
             <MenuItem Header="Process">
                 <MenuItem Header="Histogram Stretch" x:Name="HistogramStretch" Click="HistogramStretch_Click"/>
+                <Separator/>
                 <MenuItem Header="NOR - negation" x:Name="NOR" Click="Negation_Click"/>
+                <Separator/>
                 <MenuItem Header="Posterize" x:Name="Posterize" Click="Posterize_Click"/>
             </MenuItem>
         </Menu>

@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:APO"
         mc:Ignorable="d"
         Title="Histogram Stretch value input" Height="200" Width="350">
     <Grid Margin="0,0,0,1">
@@ -12,7 +11,6 @@
         <Label Content="Maximum value:" HorizontalAlignment="Left" Margin="60,76,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Center" x:Name="minValue" Margin="106,49,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="84" Foreground="Black" Visibility="Visible"/>
         <TextBox HorizontalAlignment="Center" x:Name="maxValue" Margin="106,80,0,0" TextWrapping="Wrap" Text="255" VerticalAlignment="Top" Width="84"/>
-        <Button Content="Apply" x:Name="applyButton" HorizontalAlignment="Center" Margin="0,120,0,0" VerticalAlignment="Top" Width="180" Click="ApplyButton_Click"/>
-
+        <Button Content="Apply" x:Name="ApplyButton" HorizontalAlignment="Center" Margin="0,120,0,0" VerticalAlignment="Top" Width="180" Click="ApplyButton_Click"/>
     </Grid>
 </Window>

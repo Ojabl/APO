@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using System.Windows.Shapes;
 
 namespace APO
 {
@@ -27,8 +16,8 @@ namespace APO
         {
             try 
             {
-                int min = Int32.Parse(minValue.Text);
-                int max = Int32.Parse(maxValue.Text);
+                int min = int.Parse(minValue.Text);
+                int max = int.Parse(maxValue.Text);
 
                 if(min < max && min >= 0 && min <= 255 & max >= 0 && max <= 255)
                 {
@@ -39,17 +28,15 @@ namespace APO
                         imageSquare = { Source = stretchedImage.ToBitmapSource() }
                     };
                     stretchedImageWindow.Show();
+                    this.Close();
                 }
-                else
-                {
-                    
-                }
+                else MessageBox.Show("Please input valid data\nmin and max value must be from range 0 to 255.\nmax must be greater than min\n", "Invalid data error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch
             {
                 MessageBox.Show("Please input valid data\nmin and max value must be from range 0 to 255.\nmax must be greater than min\n", "Invalid data error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            this.Close();
+            
         }
     }
 }

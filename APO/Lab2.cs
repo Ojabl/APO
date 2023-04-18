@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Emgu;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Emgu.CV.ImgHash;
 using System.Drawing;
-using System.Drawing.Imaging;
 
 namespace APO
 {
@@ -67,12 +60,12 @@ namespace APO
 
         public static Image<Bgr, byte> HistogramStretching(Image<Bgr, byte> inputImage, double minRange, double maxRange)
         {
-            if (inputImage == null)
-                return null;
+            if (inputImage == null) return null;
 
             Image<Bgr, byte> outputImage = inputImage.Clone();
             double[] minVal, maxVal;
             Point[] minLoc, maxLoc;
+            
             inputImage.MinMax(out minVal, out maxVal, out minLoc, out maxLoc);
 
             double scaleFactor = (maxRange - minRange) / (maxVal[0] - minVal[0]);
