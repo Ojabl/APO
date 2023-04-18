@@ -17,7 +17,7 @@ namespace APO
 {
     public partial class OpenedImage : Window
     {
-        private Image image;
+        public Image image;
         public bool drawPlotProfileLine = false;
         
         private Point PlotProfilestartPoint;
@@ -50,7 +50,7 @@ namespace APO
 
         private void Grayscale_Click(object sender, RoutedEventArgs e)
         {
-            this.imageSquare.Source = Lab1.ConvertToGrayscale().ToBitmapSource();
+            this.imageSquare.Source = Lab1.ConvertToGrayscale().ToBitmapSource(); 
         }
 
         private void HSV_Click(object sender, RoutedEventArgs e)
@@ -266,12 +266,7 @@ namespace APO
 
         private void HistogramStretch_Click(object sender, RoutedEventArgs e)
         {
-            //this.imageSquare.Source = Lab2.Equalization(MainWindow.imgInput).ToBitmapSource(); // histogram stretch a nie equalization
-
-            HistogramInputValues hivWindow = new HistogramInputValues
-            {
-                Title = "Histogram Stretch value input"
-            };
+            HistogramInputValues hivWindow = new HistogramInputValues();
             hivWindow.Show();
         }
 
@@ -280,6 +275,12 @@ namespace APO
             var currentImage = imageSquare.Source as BitmapSource;
             var invertedImage = Lab2.InvertColors(currentImage);
             this.imageSquare.Source = invertedImage;
+        }
+
+        private void Posterize_Click(object sender, RoutedEventArgs e)
+        {
+            PosterizeInputValuesWindow posterizeWindow = new PosterizeInputValuesWindow();
+            posterizeWindow.Show();
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Emgu.CV.ImgHash;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace APO
 {
@@ -92,6 +93,59 @@ namespace APO
             }
 
             return outputImage;
+        }
+
+        public static Image<Bgr,byte> PosterizeImage(Image<Bgr,byte> inputImage, int graylevels)
+        {
+            int levelStep = 256 / graylevels;
+
+            Image<Bgr, byte> posterizedImage = inputImage.Clone();
+
+            for (int y = 0; y < posterizedImage.Height; y++)
+            {
+                for (int x = 0; x < posterizedImage.Width; x++)
+                {
+                    Bgr pixel = posterizedImage[y, x];
+                    Bgr newPixel = new Bgr();
+
+                    newPixel.Blue = (byte)(((int)(pixel.Blue / levelStep)) * levelStep + levelStep / 2);
+                    newPixel.Green = (byte)(((int)(pixel.Green / levelStep)) * levelStep + levelStep / 2);
+                    newPixel.Red = (byte)(((int)(pixel.Red / levelStep)) * levelStep + levelStep / 2);
+
+                    posterizedImage[y, x] = newPixel;
+                }
+            }
+
+            return posterizedImage;
+
+            //if (inputImage == null) return null;
+
+            //int levelStep = 256 / graylevels; 
+            ////Image<Bgr,byte> outputImage = inputImage.Clone();
+
+            //Mat mat = Lab1.ConvertToGrayscale();
+            //Image<Gray, byte> outputImage = ParseHelper.ConvertMatToGrayEmguImage(mat);
+
+            //for (int y = 0; y < outputImage.Height; y++)
+            //{
+            //    for (int x = 0; x < outputImage.Width; x++)
+            //    {
+            //        Gray pixel = outputImage[y, x];
+            //        Gray newPixel = new Gray();
+
+            //        newPixel.Intensity = ((int)pixel.Intensity / levelStep) * levelStep;
+
+            //        //newPixel.Blue = ((int)(pixel.Blue / levelStep)) * levelStep;
+            //        //newPixel.Green = ((int)(pixel.Green / levelStep)) * levelStep;
+            //        //newPixel.Red = ((int)(pixel.Red / levelStep)) * levelStep;
+
+            //        outputImage[y, x] = newPixel;
+            //    }
+            //}
+
+
+
+            //return outputImage;
         }
     }
 }

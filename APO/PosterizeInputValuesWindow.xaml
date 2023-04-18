@@ -1,0 +1,15 @@
+﻿<Window x:Class="APO.PosterizeInputValuesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:APO"
+        mc:Ignorable="d"
+        Title="Posterize value input" Height="200" Width="350">
+    <Grid>
+        <Label Content="Image must be grayscale for this to work properly" HorizontalAlignment="Center" Margin="0,23,0,0" VerticalAlignment="Top" Width="276"/>
+        <Label Content="Number of gray levels (2-256) :" HorizontalAlignment="Left" Margin="18,70,0,0" VerticalAlignment="Top" Width="171"/>
+        <TextBox HorizontalAlignment="Left" x:Name="TbGrayLevels" Margin="194,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Apply" x:Name="applyButton" HorizontalAlignment="Center" Margin="0,124,0,0" VerticalAlignment="Top" Width="130" Click="applyButton_Click"/>
+    </Grid>
+</Window>

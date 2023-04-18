@@ -43,5 +43,12 @@ namespace APO
             }
             return image;
         }
+
+        //public static Image<Gray, byte> ConvertMatToGrayEmguImage(Mat mat)
+        //{
+        //    Image<Gray, byte> outputImage = new Image<Bgr, byte>(mat.Width, mat.Height);
+        //    mat.CopyTo(outputImage);
+        //    return outputImage;
+        //}
     }
 }

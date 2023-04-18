@@ -27,6 +27,7 @@
             <MenuItem Header="Process">
                 <MenuItem Header="Histogram Stretch" x:Name="HistogramStretch" Click="HistogramStretch_Click"/>
                 <MenuItem Header="NOR - negation" x:Name="NOR" Click="Negation_Click"/>
+                <MenuItem Header="Posterize" x:Name="Posterize" Click="Posterize_Click"/>
             </MenuItem>
         </Menu>
         <Image x:Name="imageSquare" Margin="35,45,38,27"/>

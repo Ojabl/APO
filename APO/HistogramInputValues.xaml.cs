@@ -33,22 +33,23 @@ namespace APO
                 if(min < max && min >= 0 && min <= 255 & max >= 0 && max <= 255)
                 {
                     Image<Bgr, byte> stretchedImage = Lab2.HistogramStretching(MainWindow.imgInput, min, max);
-                    var newImageWindow = new OpenedImage
+                    var stretchedImageWindow = new OpenedImage
                     {
                         Title = "Stretched histogram - " + System.IO.Path.GetFileName(MainWindow.imageWindow.Title),
                         imageSquare = { Source = stretchedImage.ToBitmapSource() }
                     };
-                    newImageWindow.Show();
+                    stretchedImageWindow.Show();
                 }
                 else
                 {
-                    MessageBox.Show("Please input valid data\nmin and max value must be from range 0 to 255.\nmax must be greater than min\n", "Invalid data error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    
                 }
             }
             catch
             {
                 MessageBox.Show("Please input valid data\nmin and max value must be from range 0 to 255.\nmax must be greater than min\n", "Invalid data error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            this.Close();
         }
     }
 }

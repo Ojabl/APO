@@ -12,6 +12,7 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.ImgHash;
 using Emgu.CV.Util;
+using Emgu.CV.CvEnum;
 
 namespace APO
 {
@@ -24,6 +25,11 @@ namespace APO
                 Image<Gray, byte> imgOutput = new Image<Gray, byte>(MainWindow.imgInput.Width, MainWindow.imgInput.Height, new Gray(0));
                 imgOutput = MainWindow.imgInput.Convert<Gray, byte>();
 
+
+                MainWindow.imgInput = new Image<Bgr, byte>(imgOutput.Width, imgOutput.Height);
+                CvInvoke.CvtColor(imgOutput, MainWindow.imgInput, Emgu.CV.CvEnum.ColorConversion.Gray2Bgr);
+                
+                
                 Mat mat = imgOutput.Mat;
                 mat.ToBitmap();
 
@@ -43,6 +49,9 @@ namespace APO
 
                 imageOutputHSV = MainWindow.imgInput.Convert<Hsv, byte>();
 
+                MainWindow.imgInput = new Image<Bgr, byte>(imageOutputHSV.Width, imageOutputHSV.Height);
+                CvInvoke.CvtColor(imageOutputHSV, MainWindow.imgInput, Emgu.CV.CvEnum.ColorConversion.Gray2Bgr);
+
                 Mat mat = imageOutputHSV.Mat;
                 mat.ToBitmap();
 
@@ -57,11 +66,14 @@ namespace APO
         {
             if (MainWindow.imageWindow != null)
             {
-                Image<Lab, byte> imageOutputHSV = new Image<Lab, byte>(MainWindow.imgInput.Width, MainWindow.imgInput.Height);
+                Image<Lab, byte> imageOutputLAB = new Image<Lab, byte>(MainWindow.imgInput.Width, MainWindow.imgInput.Height);
 
-                imageOutputHSV = MainWindow.imgInput.Convert<Lab, byte>();
+                imageOutputLAB = MainWindow.imgInput.Convert<Lab, byte>();
 
-                Mat mat = imageOutputHSV.Mat;
+                MainWindow.imgInput = new Image<Bgr, byte>(imageOutputLAB.Width, imageOutputLAB.Height);
+                CvInvoke.CvtColor(imageOutputLAB, MainWindow.imgInput, Emgu.CV.CvEnum.ColorConversion.Gray2Bgr);
+
+                Mat mat = imageOutputLAB.Mat;
                 mat.ToBitmap();
 
                 return mat;
