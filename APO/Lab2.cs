@@ -9,6 +9,31 @@ namespace APO
 {
     class Lab2
     {
+        public static BitmapSource InvertColors(BitmapSource source)
+        {
+            int width = source.PixelWidth;
+            int height = source.PixelHeight;
+
+            FormatConvertedBitmap grayscaleImage = new FormatConvertedBitmap();
+            grayscaleImage.BeginInit();
+            grayscaleImage.Source = source;
+            grayscaleImage.DestinationFormat = PixelFormats.Gray8;
+            grayscaleImage.EndInit();
+
+            int bytesPerPixel = 1;
+            int stride = width * bytesPerPixel;
+            byte[] pixelData = new byte[height * stride];
+
+            grayscaleImage.CopyPixels(pixelData, stride, 0);
+
+            for (int i = 0; i < pixelData.Length; i++)
+            {
+                pixelData[i] = (byte)(255 - pixelData[i]);
+            }
+
+            return BitmapSource.Create(width, height, grayscaleImage.DpiX, grayscaleImage.DpiY, PixelFormats.Gray8, null, pixelData, stride);
+        }
+
         public static Image<Bgr, byte> Equalization(Image<Bgr, byte> image, int minValue, int maxValue)
         {
             Image<Bgr, byte> result = image.Clone();
@@ -25,39 +50,10 @@ namespace APO
                 currentChannel._EqualizeHist();
                 CvInvoke.Normalize(currentChannel, currentChannel, 0, 255, Emgu.CV.CvEnum.NormType.MinMax);
 
-                // Copy the processed channel back to the corresponding channel in the result image
                 CvInvoke.InsertChannel(currentChannel, result, channel);
             }
             return result;
         }
-
-        public static BitmapSource InvertColors(BitmapSource source)
-        {
-            int width = source.PixelWidth;
-            int height = source.PixelHeight;
-
-            // Convert the image to a grayscale format with 8 bits per pixel
-            FormatConvertedBitmap grayscaleImage = new FormatConvertedBitmap();
-            grayscaleImage.BeginInit();
-            grayscaleImage.Source = source;
-            grayscaleImage.DestinationFormat = PixelFormats.Gray8;
-            grayscaleImage.EndInit();
-
-            // Invert the colors
-            int bytesPerPixel = 1;
-            int stride = width * bytesPerPixel;
-            byte[] pixelData = new byte[height * stride];
-
-            grayscaleImage.CopyPixels(pixelData, stride, 0);
-
-            for (int i = 0; i < pixelData.Length; i++)
-            {
-                pixelData[i] = (byte)(255 - pixelData[i]);
-            }
-
-            return BitmapSource.Create(width, height, grayscaleImage.DpiX, grayscaleImage.DpiY, PixelFormats.Gray8, null, pixelData, stride);
-        }
-
         public static Image<Bgr, byte> HistogramStretching(Image<Bgr, byte> inputImage, double minRange, double maxRange)
         {
             if (inputImage == null) return null;
@@ -110,35 +106,6 @@ namespace APO
             }
 
             return posterizedImage;
-
-            //if (inputImage == null) return null;
-
-            //int levelStep = 256 / graylevels; 
-            ////Image<Bgr,byte> outputImage = inputImage.Clone();
-
-            //Mat mat = Lab1.ConvertToGrayscale();
-            //Image<Gray, byte> outputImage = ParseHelper.ConvertMatToGrayEmguImage(mat);
-
-            //for (int y = 0; y < outputImage.Height; y++)
-            //{
-            //    for (int x = 0; x < outputImage.Width; x++)
-            //    {
-            //        Gray pixel = outputImage[y, x];
-            //        Gray newPixel = new Gray();
-
-            //        newPixel.Intensity = ((int)pixel.Intensity / levelStep) * levelStep;
-
-            //        //newPixel.Blue = ((int)(pixel.Blue / levelStep)) * levelStep;
-            //        //newPixel.Green = ((int)(pixel.Green / levelStep)) * levelStep;
-            //        //newPixel.Red = ((int)(pixel.Red / levelStep)) * levelStep;
-
-            //        outputImage[y, x] = newPixel;
-            //    }
-            //}
-
-
-
-            //return outputImage;
         }
     }
 }

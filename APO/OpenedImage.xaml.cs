@@ -232,5 +232,17 @@ namespace APO
             PosterizeInputValuesWindow posterizeWindow = new PosterizeInputValuesWindow();
             posterizeWindow.Show();
         }
+
+        #region Neighbourhood operations
+        private void LinearBlur_Click(object sender, RoutedEventArgs e)
+        {
+            this.imageSquare.Source = Lab3.BlurImage(imageSquare.Source as BitmapSource, 3);
+        }
+
+        private void LineraSharpen_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        #endregion
     }
 }

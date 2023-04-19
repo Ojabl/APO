@@ -29,6 +29,9 @@
                 <MenuItem Header="NOR - negation" x:Name="NOR" Click="Negation_Click"/>
                 <Separator/>
                 <MenuItem Header="Posterize" x:Name="Posterize" Click="Posterize_Click"/>
+                <Separator/>
+                <MenuItem Header="Linear Blur" x:Name="LinearBlur" Click="LinearBlur_Click"/>
+                <MenuItem Header="Linear Sharpen" x:Name="LineraSharpen" Click="LineraSharpen_Click"/>
             </MenuItem>
         </Menu>
         <Image x:Name="imageSquare" Margin="35,45,38,27"/>
