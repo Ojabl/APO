@@ -25,16 +25,24 @@
             </MenuItem>
             <MenuItem Header="Process">
                 <MenuItem Header="Histogram Stretch" x:Name="HistogramStretch" Click="HistogramStretch_Click"/>
+                <MenuItem Header="Equalization" x:Name="Equalization" Click="HistogramEqualization_Click"/>
                 <Separator/>
                 <MenuItem Header="NOR - negation" x:Name="NOR" Click="Negation_Click"/>
                 <Separator/>
                 <MenuItem Header="Posterize" x:Name="Posterize" Click="Posterize_Click"/>
                 <Separator/>
-                <MenuItem Header="Linear Blur" x:Name="LinearBlur" Click="LinearBlur_Click"/>
-                <MenuItem Header="Linear Sharpen" x:Name="LineraSharpen" Click="LineraSharpen_Click"/>
+                <MenuItem Header="Convolution">
+                    <MenuItem Header="Gaussian blur" x:Name="GaussianBlur" Click="GaussianBlur_Click"/>
+                    <Separator/>
+                    <MenuItem Header="Edge Detection">
+                        <MenuItem Header="Sobel" x:Name="SobelEdgeDetection" Click="SobelEdgeDetection_Click"/>
+                        <MenuItem Header="Laplacian" x:Name="LaplacianEdgeDetection" Click="LaplacianEdgeDetection_Click"/>
+                        <MenuItem Header="Canny" x:Name="CannyEdgeDetection" Click="CannyEdgeDetection_Click"/>
+                    </MenuItem>
+                </MenuItem>
             </MenuItem>
         </Menu>
         <Image x:Name="imageSquare" Margin="35,45,38,27"></Image>
-        <Line x:Name="PlotProfileLine" Stroke="Yellow" StrokeThickness="3" Visibility="Hidden" />
+        <Line x:Name="PlotProfileLine" Stroke="Yellow" StrokeThickness="3" Visibility="Hidden"/>
     </Grid>
 </Window>

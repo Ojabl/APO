@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using APO_Projekt_1;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using ScottPlot;
@@ -131,14 +132,13 @@ namespace APO
         {
             int[] histogramValues = new int[256];
 
-            for (int y = 0; y < MainWindow.imgInput.Height; y++)
+            for (int x = 0; x < MainWindow.imgInput.Height; x++)
             {
-                for (int x = 0; x < MainWindow.imgInput.Width; x++)
+                for (int y = 0; y < MainWindow.imgInput.Width; y++)
                 {
-                    Bgr pixel = MainWindow.imgInput[y, x];
-                    byte gray = (byte)((pixel.Red * 0.299) + (pixel.Green * 0.587) + (pixel.Blue * 0.114));
+                    Bgr pixel = MainWindow.imgInput[x,y];
+                    int gray = (int)Math.Round(((pixel.Red * 0.299) + (pixel.Green * 0.587) + (pixel.Blue * 0.114)));
                     histogramValues[gray]++;
-
                 }
             }
 
@@ -156,7 +156,7 @@ namespace APO
 
             wpfPlot.MouseMove += (s, eMouseMove) =>
             {
-                var mousePos = eMouseMove.GetPosition(wpfPlot);
+                var mousePos = eMouseMove.GetPosition(this);
                 double mouseX = wpfPlot.Plot.GetCoordinateX((float)mousePos.X);
                 double mouseY = wpfPlot.Plot.GetCoordinateY((float)mousePos.Y);
                 long xValue = (long)Math.Round(mouseX);
@@ -223,10 +223,16 @@ namespace APO
             HistogramInputValues hivWindow = new HistogramInputValues();
             hivWindow.Show();
         }
+        private void HistogramEqualization_Click(object sender, RoutedEventArgs e)
+        {
+            this.imageSquare.Source = Lab2.Equalization(MainWindow.imgInput).ToBitmapSource();
+        }
+        
         private void Negation_Click(object sender, RoutedEventArgs e)
         {
             this.imageSquare.Source = Lab2.InvertColors(imageSquare.Source as BitmapSource);
         }
+        
         private void Posterize_Click(object sender, RoutedEventArgs e)
         {
             PosterizeInputValuesWindow posterizeWindow = new PosterizeInputValuesWindow();
@@ -234,14 +240,22 @@ namespace APO
         }
 
         #region Neighbourhood operations
-        private void LinearBlur_Click(object sender, RoutedEventArgs e)
+        private void GaussianBlur_Click(object sender, RoutedEventArgs e)
         {
-            this.imageSquare.Source = Lab3.BlurImage(imageSquare.Source as BitmapSource, 3);
+            this.imageSquare.Source = Lab3.GaussianBlur(MainWindow.imgInput, 5, 1.0).ToBitmapSource();
+        }
+        private void SobelEdgeDetection_Click(object sender, RoutedEventArgs e)
+        {
+            this.imageSquare.Source = Lab3.SobelEdgeDetection(MainWindow.imgInput).ToBitmapSource();
+        }
+        private void LaplacianEdgeDetection_Click(object sender, RoutedEventArgs e)
+        {
+            this.imageSquare.Source = Lab3.LaplacianEdgeDetection(MainWindow.imgInput).ToBitmapSource();
         }
 
-        private void LineraSharpen_Click(object sender, RoutedEventArgs e)
+        private void CannyEdgeDetection_Click(object sender, RoutedEventArgs e)
         {
-
+            this.imageSquare.Source = Lab3.CannyEdgeDetection(MainWindow.imgInput, 50, 150).ToBitmapSource();
         }
         #endregion
     }

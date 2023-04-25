@@ -1,60 +1,41 @@
-﻿using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+﻿using Emgu.CV.Structure;
 using Emgu.CV;
-using Emgu.CV.Util;
-using Emgu.CV.CvEnum;
-using Emgu.CV.Structure;
-using System.Drawing;
-using MathNet.Numerics.LinearAlgebra.Double;
-using MathNet.Numerics.LinearAlgebra.Storage;
-using System.Runtime.InteropServices;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace APO
+namespace APO_Projekt_1
 {
     class Lab3
     {
-        public static BitmapSource BlurImage(BitmapSource inputBitmap, int kernelSize)
+        public static Image<Bgr, byte> GaussianBlur(Image<Bgr, byte> inputImage, int kernelSize, double sigma)
         {
-            // Copy the pixels of the input bitmap into a byte array
-            int stride = (inputBitmap.PixelWidth * inputBitmap.Format.BitsPerPixel + 7) / 8;
-            byte[] pixelData = new byte[stride * inputBitmap.PixelHeight];
-            inputBitmap.CopyPixels(pixelData, stride, 0);
+            var outputImage = inputImage.SmoothGaussian(kernelSize, kernelSize, sigma, sigma);
+            return outputImage;
+        }
+        public static Image<Gray, byte> SobelEdgeDetection(Image<Bgr, byte> inputImage)
+        {
+            var grayImage = inputImage.Convert<Gray, byte>();
+            var sobelImage = grayImage.Sobel(0, 1, 3).Add(grayImage.Sobel(1, 0, 3)).AbsDiff(new Gray(0.0));
+            var sobelImageByte = sobelImage.Convert<Gray, byte>();
+            return sobelImageByte;
+        }
 
-            // Create an Image<Bgr, byte> object from the input byte array
-            Image<Bgr, byte> inputImage = new Image<Bgr, byte>(inputBitmap.PixelWidth, inputBitmap.PixelHeight);
-            inputImage.Bytes = pixelData;
+        public static Image<Gray, byte> LaplacianEdgeDetection(Image<Bgr, byte> inputImage)
+        {
+            var grayImage = inputImage.Convert<Gray, byte>();
+            var laplacianImage = grayImage.Laplace(3);
+            var laplacianImageByte = laplacianImage.Convert<Gray, byte>();
+            return laplacianImageByte;
+        }
 
-            // Create a "Box Blur" kernel
-            double[,] kernelValues = new double[kernelSize, kernelSize];
-            for (int i = 0; i < kernelSize; i++)
-            {
-                for (int j = 0; j < kernelSize; j++)
-                {
-                    kernelValues[i, j] = 1.0 / (kernelSize * kernelSize);
-                }
-            }
-            System.Drawing.Size kSize = new System.Drawing.Size(kernelSize, kernelSize);
-            
-            // Apply the "Box Blur" kernel to the input image
-            Image<Bgr, byte> outputImage = new Image<Bgr, byte>(inputImage.Size);
-            System.Drawing.Point anchor = new System.Drawing.Point(-1, -1);
-
-            // CvInvoke.Blur(inputImage, outputImage,kSize,anchor);
-            CvInvoke.BoxFilter(inputImage, outputImage, DepthType.Default, kSize, anchor, true, BorderType.Default);
-            // CvInvoke.BoxFilter(inputImage, outputImage, DepthType.Default, kernelSize, anchor, false, );
-            // CvInvoke.Blur(inputImage,outputImage,)
-            // outputImage.SmoothBlur(outputImage.Width, outputImage.Height);
-
-            // Mat maskMat = new Mat(kSize, DepthType.Default, 3);
-            // maskMat.SetTo(kernelValues);
-             //CvInvoke.Filter2D(inputImage, outputImage, maskMat, anchor);
-
-            // Convert the output Image<Bgr, byte> to a BitmapSource
-            byte[] outputData = outputImage.Bytes;
-            int outputStride = outputImage.Width * outputImage.NumberOfChannels;
-            BitmapSource outputBitmap = BitmapSource.Create(outputImage.Width, outputImage.Height, 96, 96, PixelFormats.Gray8, null, outputData, outputStride);
-            return outputBitmap;
+        public static Image<Gray, byte> CannyEdgeDetection(Image<Bgr, byte> inputImage, double threshold1, double threshold2)
+        {
+            var grayImage = inputImage.Convert<Gray, byte>();
+            var cannyImage = grayImage.Canny(threshold1, threshold2);
+            return cannyImage;
         }
     }
 }

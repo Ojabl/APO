@@ -34,7 +34,7 @@ namespace APO
             return BitmapSource.Create(width, height, grayscaleImage.DpiX, grayscaleImage.DpiY, PixelFormats.Gray8, null, pixelData, stride);
         }
 
-        public static Image<Bgr, byte> Equalization(Image<Bgr, byte> image, int minValue, int maxValue)
+        public static Image<Bgr, byte> Equalization(Image<Bgr, byte> image)
         {
             Image<Bgr, byte> result = image.Clone();
             Image<Gray, byte>[] channels = image.Split();
@@ -44,11 +44,13 @@ namespace APO
                 var currentChannel = channels[channel];
                 double[] minVal = new double[1];
                 double[] maxVal = new double[1];
-                System.Drawing.Point[] minLoc = new System.Drawing.Point[1];
-                System.Drawing.Point[] maxLoc = new System.Drawing.Point[1];
+                Point[] minLoc = new Point[1];
+                Point[] maxLoc = new Point[1];
                 currentChannel.MinMax(out minVal, out maxVal, out minLoc, out maxLoc);
                 currentChannel._EqualizeHist();
                 CvInvoke.Normalize(currentChannel, currentChannel, 0, 255, Emgu.CV.CvEnum.NormType.MinMax);
+                
+                MainWindow.imgInput = currentChannel.Convert<Bgr,byte>();
 
                 CvInvoke.InsertChannel(currentChannel, result, channel);
             }
