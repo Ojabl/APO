@@ -34,7 +34,7 @@
                 <MenuItem Header="Linear Sharpen" x:Name="LineraSharpen" Click="LineraSharpen_Click"/>
             </MenuItem>
         </Menu>
-        <Image x:Name="imageSquare" Margin="35,45,38,27"/>
-        <Line x:Name="PlotProfileLine" Stroke="Yellow" StrokeThickness="3" Visibility="Hidden"/>
+        <Image x:Name="imageSquare" Margin="35,45,38,27"></Image>
+        <Line x:Name="PlotProfileLine" Stroke="Yellow" StrokeThickness="3" Visibility="Hidden" />
     </Grid>
 </Window>

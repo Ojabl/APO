@@ -39,14 +39,22 @@ namespace APO
             // Apply the "Box Blur" kernel to the input image
             Image<Bgr, byte> outputImage = new Image<Bgr, byte>(inputImage.Size);
             System.Drawing.Point anchor = new System.Drawing.Point(-1, -1);
-            CvInvoke.Blur(inputImage, outputImage,kSize,anchor);
+
+            // CvInvoke.Blur(inputImage, outputImage,kSize,anchor);
+            CvInvoke.BoxFilter(inputImage, outputImage, DepthType.Default, kSize, anchor, true, BorderType.Default);
+            // CvInvoke.BoxFilter(inputImage, outputImage, DepthType.Default, kernelSize, anchor, false, );
+            // CvInvoke.Blur(inputImage,outputImage,)
+            // outputImage.SmoothBlur(outputImage.Width, outputImage.Height);
+
+            // Mat maskMat = new Mat(kSize, DepthType.Default, 3);
+            // maskMat.SetTo(kernelValues);
+             //CvInvoke.Filter2D(inputImage, outputImage, maskMat, anchor);
 
             // Convert the output Image<Bgr, byte> to a BitmapSource
             byte[] outputData = outputImage.Bytes;
             int outputStride = outputImage.Width * outputImage.NumberOfChannels;
-            BitmapSource outputBitmap = BitmapSource.Create(outputImage.Width, outputImage.Height, 96, 96, PixelFormats.Bgr24, null, outputData, outputStride);
+            BitmapSource outputBitmap = BitmapSource.Create(outputImage.Width, outputImage.Height, 96, 96, PixelFormats.Gray8, null, outputData, outputStride);
             return outputBitmap;
         }
-
     }
 }

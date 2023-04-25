@@ -210,7 +210,7 @@ namespace APO
         {
             if (e.LeftButton == MouseButtonState.Pressed && drawPlotProfileLine)
             {
-                System.Windows.Point currentPoint = e.GetPosition(imageSquare);
+                System.Windows.Point currentPoint = e.GetPosition(this);
                 PlotProfileLine.X2 = currentPoint.X;
                 PlotProfileLine.Y2 = currentPoint.Y;
             }

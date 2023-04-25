@@ -37,9 +37,6 @@ namespace APO
 
                 imageOutputHSV = MainWindow.imgInput.Convert<Hsv, byte>();
 
-                //MainWindow.imgInput = new Image<Bgr, byte>(imageOutputHSV.Width, imageOutputHSV.Height);
-                //CvInvoke.CvtColor(imageOutputHSV, MainWindow.imgInput, Emgu.CV.CvEnum.ColorConversion.Gray2Bgr);
-
                 Mat mat = imageOutputHSV.Mat;
                 mat.ToBitmap();
 
@@ -54,9 +51,6 @@ namespace APO
                 Image<Lab, byte> imageOutputLAB = new Image<Lab, byte>(MainWindow.imgInput.Width, MainWindow.imgInput.Height);
 
                 imageOutputLAB = MainWindow.imgInput.Convert<Lab, byte>();
-
-                //MainWindow.imgInput = new Image<Bgr, byte>(imageOutputLAB.Width, imageOutputLAB.Height);
-                //CvInvoke.CvtColor(imageOutputLAB, MainWindow.imgInput, Emgu.CV.CvEnum.ColorConversion.Gray2Bgr);
 
                 Mat mat = imageOutputLAB.Mat;
                 mat.ToBitmap();
@@ -131,7 +125,7 @@ namespace APO
                 double t = (double)i / (numPoints - 1);
                 int x = (int)Math.Round(startPoint.X * (1 - t) + endPoint.X * t);
                 int y = (int)Math.Round(startPoint.Y * (1 - t) + endPoint.Y * t);
-                Bgr pixel = image[y, x];
+                Bgr pixel = image[x,y];
                 byte gray = (byte)((pixel.Red * 0.299) + (pixel.Green * 0.587) + (pixel.Blue * 0.114));
                 profile[i] = gray;
             }
