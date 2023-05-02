@@ -254,7 +254,7 @@ namespace APO
         {
             this.imageSquare.Source = Lab3.SobelEdgeDetection(MainWindow.imgInput).ToBitmapSource();
         }
-        private void LaplacianEdgeDetection_Click(object sender, RoutedEventArgs e)
+        private void LaplassianEdgeDetection_Click(object sender, RoutedEventArgs e)
         {
             this.imageSquare.Source = Lab3.LaplacianEdgeDetection(MainWindow.imgInput).ToBitmapSource();
         }
@@ -263,7 +263,7 @@ namespace APO
             this.imageSquare.Source = Lab3.CannyEdgeDetection(MainWindow.imgInput, 50, 150).ToBitmapSource();
         }
 
-        private void LaplacianMask_Click(object sender, RoutedEventArgs e)
+        private void LaplassianMask_Click(object sender, RoutedEventArgs e)
         {
             SelectLaplassianMaskWindow selectLaplassianMaskWindow = new SelectLaplassianMaskWindow();
             selectLaplassianMaskWindow.Show();

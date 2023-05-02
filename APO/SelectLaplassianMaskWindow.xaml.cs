@@ -1,4 +1,5 @@
 ﻿using APO_Projekt_1;
+using Emgu.CV;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,13 @@ namespace APO
             }
 
             MainWindow.imgInput = Lab3.ApplyLaplassianMask(MainWindow.imgInput, maskType);
+
+            OpenedImage openedImage = new OpenedImage()
+            {
+                Title = "Laplassian mask",
+                imageSquare = { Source = MainWindow.imgInput.ToBitmapSource() }
+            };
+            openedImage.Show();
             
             this.Close();
         }

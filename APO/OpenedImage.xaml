@@ -34,13 +34,13 @@
                 <MenuItem Header="Convolution">
                     <MenuItem Header="Edge Detection">
                         <MenuItem Header="Sobel" x:Name="SobelEdgeDetection" Click="SobelEdgeDetection_Click"/>
-                        <MenuItem Header="Laplacian" x:Name="LaplacianEdgeDetection" Click="LaplacianEdgeDetection_Click"/>
+                        <MenuItem Header="Laplassian" x:Name="LaplassianEdgeDetection" Click="LaplassianEdgeDetection_Click"/>
                         <MenuItem Header="Canny" x:Name="CannyEdgeDetection" Click="CannyEdgeDetection_Click"/>
                     </MenuItem>
                     <MenuItem Header="Gaussian blur" x:Name="GaussianBlur" Click="GaussianBlur_Click"/>
                     <MenuItem Header="Laplassian Sharpening" x:Name="LaplassianSharpening" Click="LaplassianSharpening_Click"/>
                     <Separator/>
-                    <MenuItem Header="Laplacian Mask" x:Name="LaplacianMask" Click="LaplacianMask_Click"/>
+                    <MenuItem Header="Laplassian Mask" x:Name="LaplassianMask" Click="LaplassianMask_Click"/>
                 </MenuItem>
             </MenuItem>
         </Menu>

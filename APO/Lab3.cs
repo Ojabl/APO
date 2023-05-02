@@ -89,14 +89,6 @@ namespace APO_Projekt_1
             CvInvoke.Filter2D(inputImage, result, kernel, new System.Drawing.Point(-1, -1));
             
             MainWindow.imgInput = inputImage;
-
-            OpenedImage openedImage = new OpenedImage()
-            {
-                imageSquare = { Source = result.ToBitmapSource() },
-                Title = "Applied laplassian mask"
-            };
-            
-            openedImage.Show();
             
             return result;
         }
