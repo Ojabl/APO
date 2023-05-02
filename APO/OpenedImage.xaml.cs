@@ -244,6 +244,12 @@ namespace APO
         {
             this.imageSquare.Source = Lab3.GaussianBlur(MainWindow.imgInput, 5, 1.0).ToBitmapSource();
         }
+        private void LaplassianSharpening_Click(object sender, RoutedEventArgs e)
+        {
+            int maskType = 1; // Change this value to 1, 2, or 3 for different Laplacian masks
+            this.imageSquare.Source = Lab3.ApplyLaplassianMask(MainWindow.imgInput, maskType).ToBitmapSource();
+        }
+
         private void SobelEdgeDetection_Click(object sender, RoutedEventArgs e)
         {
             this.imageSquare.Source = Lab3.SobelEdgeDetection(MainWindow.imgInput).ToBitmapSource();
@@ -252,10 +258,15 @@ namespace APO
         {
             this.imageSquare.Source = Lab3.LaplacianEdgeDetection(MainWindow.imgInput).ToBitmapSource();
         }
-
         private void CannyEdgeDetection_Click(object sender, RoutedEventArgs e)
         {
             this.imageSquare.Source = Lab3.CannyEdgeDetection(MainWindow.imgInput, 50, 150).ToBitmapSource();
+        }
+
+        private void LaplacianMask_Click(object sender, RoutedEventArgs e)
+        {
+            SelectLaplassianMaskWindow selectLaplassianMaskWindow = new SelectLaplassianMaskWindow();
+            selectLaplassianMaskWindow.Show();
         }
         #endregion
     }

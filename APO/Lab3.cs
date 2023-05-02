@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using APO;
 
 namespace APO_Projekt_1
 {
@@ -37,5 +38,69 @@ namespace APO_Projekt_1
             var cannyImage = grayImage.Canny(threshold1, threshold2);
             return cannyImage;
         }
+
+        public static Image<Bgr, byte> ApplyLaplassianMask(Image<Bgr, byte> inputImage, int maskType)
+        {
+            int[,] laplacianMask;
+
+            switch (maskType)
+            {
+                case 1:
+                    laplacianMask = new int[,]
+                    {
+                        { 0, -1, 0 },
+                        { -1, 5, -1 },
+                        { 0, -1, 0 }
+                    };
+                    break;
+                case 2:
+                    laplacianMask = new int[,]
+                    {
+                        { -1, -1, -1 },
+                        { -1, 9, -1 },
+                        { -1, -1, -1 }
+                    };
+                    break;
+                case 3:
+                    laplacianMask = new int[,]
+                    {
+                        { 1, -2, 1 },
+                        { -2, 5, -2 },
+                        { 1, -2, 1 }
+                    };
+                    break;
+                default:
+                    throw new ArgumentException("Invalid mask type");
+            }
+
+            Matrix<float> floatMask = new Matrix<float>(3, 3);
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    floatMask[i, j] = laplacianMask[i, j];
+                }
+            }
+
+            Mat kernel = floatMask.Mat;
+
+            var result = inputImage.CopyBlank();
+            CvInvoke.Filter2D(inputImage, result, kernel, new System.Drawing.Point(-1, -1));
+            
+            MainWindow.imgInput = inputImage;
+
+            OpenedImage openedImage = new OpenedImage()
+            {
+                imageSquare = { Source = result.ToBitmapSource() },
+                Title = "Applied laplassian mask"
+            };
+            
+            openedImage.Show();
+            
+            return result;
+        }
+
+
     }
 }

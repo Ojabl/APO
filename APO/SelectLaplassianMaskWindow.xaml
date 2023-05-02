@@ -1,0 +1,23 @@
+﻿<Window x:Class="APO.SelectLaplassianMaskWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:APO"
+        mc:Ignorable="d"
+        Title="SelectLaplassianMaskWindow" Height="350" Width="600">
+    <Grid>
+        <Label Content="Select Laplassian Mask:" HorizontalAlignment="Center" Margin="0,27,0,0" VerticalAlignment="Top" Height="37" Width="178" FontSize="15"/>
+
+        <RadioButton x:Name="RadioButton1" Content="" HorizontalAlignment="Left" Margin="101,87,0,0" VerticalAlignment="Top" Width="14"/>
+        <RadioButton x:Name="RadioButton2" Content="" HorizontalAlignment="Center" Margin="0,87,0,0" VerticalAlignment="Top" Width="14"/>
+        <RadioButton x:Name="RadioButton3" Content="" HorizontalAlignment="Left" Margin="478,87,0,0" VerticalAlignment="Top" Width="14"/>
+
+        <Image x:Name="LaplassianMask1" Height="120" Width="140" Margin="38,119,0,95" HorizontalAlignment="Left" Source="C:\Users\osaja\Desktop\laplassianMask1.png"/>
+        <Image x:Name="LaplassianMask2" Height="120" Width="140"  Margin="0,120,0,94" HorizontalAlignment="Center" Source="C:\Users\osaja\Desktop\laplassianMask2.png"/>
+        <Image x:Name="LaplassianMask3" Height="120" Width="140" Margin="0,119,32,95" HorizontalAlignment="Right" Source="C:\Users\osaja\Desktop\laplassianMask3.png"/>
+
+        <Button Content="Apply" x:Name="applyButton" HorizontalAlignment="Center" Margin="0,261,0,0" VerticalAlignment="Top" Width="92" Click="applyButton_Click"/>
+
+    </Grid>
+</Window>
