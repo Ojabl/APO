@@ -1,0 +1,16 @@
+﻿<Window x:Class="APO.BlendTwoImagesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:APO"
+        mc:Ignorable="d"
+        Title="BlendTwoImagesWindow" Height="180" Width="250">
+    <Grid>
+        <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="Load two images:" VerticalAlignment="Top"/>
+        <Button Content="1st image" x:Name="BtnFirstImage" HorizontalAlignment="Left" Margin="40,47,0,0" VerticalAlignment="Top" Click="BtnFirstImage_Click"/>
+        <Button Content="2nd image" x:Name="BtnSecondImage" HorizontalAlignment="Left" Margin="134,47,0,0" VerticalAlignment="Top" Click="BtnSecondImage_Click"/>
+        <Button Content="Apply" x:Name="BtnApply" HorizontalAlignment="Center" Margin="0,87,0,0" VerticalAlignment="Top" Click="BtnApply_Click"/>
+
+    </Grid>
+</Window>

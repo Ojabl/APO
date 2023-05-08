@@ -50,5 +50,15 @@ namespace APO
             Info info = new Info();
             info.Show();
         }
+
+        #region Operations
+
+        private void Blend_Click(object sender, RoutedEventArgs e)
+        {
+            BlendTwoImagesWindow blendWindow = new BlendTwoImagesWindow();
+            blendWindow.Show();
+        }
+
+        #endregion
     }
 }

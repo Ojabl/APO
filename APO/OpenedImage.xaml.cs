@@ -258,6 +258,12 @@ namespace APO
             inputSubValueWindow.Show();
         }
 
+        private void Blend_Click(object sender, RoutedEventArgs e)
+        {
+            BlendTwoImagesWindow blendTwoImagesWindow = new BlendTwoImagesWindow();
+            blendTwoImagesWindow.Show();
+        }
+
         #endregion
 
         #region Neighbourhood operations

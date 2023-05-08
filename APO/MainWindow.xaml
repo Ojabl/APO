@@ -12,6 +12,11 @@
                 <MenuItem x:Name="OpenImageMenuItem" Header="Open Image..." Click="OpenImageMenuItem_Click" />
             </MenuItem>
             <MenuItem Header="Info" x:Name="info" Click="info_Click"/>
+            <MenuItem x:Name="Operations" Header="Operations">
+                <MenuItem x:Name="Math" Header="Math">
+                    <MenuItem x:Name="Blend" Header="Blend" Click="Blend_Click"/>
+                </MenuItem>
+            </MenuItem>
         </Menu>
     </Grid>
 </Window>

@@ -1,10 +1,6 @@
 ﻿using Emgu.CV.Structure;
 using Emgu.CV;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APO
 {
@@ -163,7 +159,22 @@ namespace APO
                 }
             }
             return output;
+        } // TODO: check if it works
+
+        public static Image<Bgr,byte> BlendImages(Image<Bgr,byte> firstImage, Image<Bgr, byte> secondImage)
+        {
+            float blendAlpha = 0.5f;
+            
+            Image<Bgr, byte> outputImage = new Image<Bgr, byte>(firstImage.Size);
+            
+            CvInvoke.AddWeighted(firstImage,blendAlpha,secondImage, 1-blendAlpha,0, outputImage);
+
+            return outputImage;
         }
+
+        //AND
+        //OR
+        //XOR
 
         #endregion 
     }
