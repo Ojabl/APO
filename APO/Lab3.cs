@@ -113,5 +113,11 @@ namespace APO
 
             return result;
         }
+
+        public static Image<Bgr,byte> MedianFilter(Image<Bgr,byte> input, int kernelSize)
+        {
+            Image<Bgr,byte> output = input.SmoothMedian(kernelSize);
+            return output;
+        }
     }
 }

@@ -274,5 +274,18 @@ namespace APO
             CustomConvolutionMask customConvolutionMask = new CustomConvolutionMask();
             customConvolutionMask.Show();
         }
+
+        private void MedianFilter3x3_Click(object sender, RoutedEventArgs e)
+        {
+            this.imageSquare.Source = Lab3.MedianFilter(MainWindow.imgInput, 3).ToBitmapSource();
+        }
+        private void MedianFilter5x5_Click(object sender, RoutedEventArgs e)
+        {
+            this.imageSquare.Source = Lab3.MedianFilter(MainWindow.imgInput, 5).ToBitmapSource();
+        }
+        private void MedianFilter7x7_Click(object sender, RoutedEventArgs e)
+        {
+            this.imageSquare.Source = Lab3.MedianFilter(MainWindow.imgInput, 7).ToBitmapSource();
+        }
     }
 }

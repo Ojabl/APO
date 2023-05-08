@@ -42,6 +42,12 @@
                     <Separator/>
                     <MenuItem Header="Laplassian Mask" x:Name="LaplassianMask" Click="LaplassianMask_Click"/>
                     <MenuItem Header="Insert custom convolution mask" x:Name="CustomConvolutionMask" Click="CustomConvolutionMask_Click"/>
+                    <Separator/>
+                    <MenuItem Header="Median filter" x:Name="MedianFilter">
+                        <MenuItem Header="3x3" x:Name="MedianFilter3x3" Click="MedianFilter3x3_Click"/>
+                        <MenuItem Header="5x5" x:Name="MedianFilter5x5" Click="MedianFilter5x5_Click"/>
+                        <MenuItem Header="7x7" x:Name="MedianFilter7x7" Click="MedianFilter7x7_Click"/>
+                    </MenuItem>
                 </MenuItem>
             </MenuItem>
         </Menu>
