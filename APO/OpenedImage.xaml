@@ -27,6 +27,8 @@
                 <MenuItem Header="Histogram Stretch" x:Name="HistogramStretch" Click="HistogramStretch_Click"/>
                 <MenuItem Header="Equalization" x:Name="Equalization" Click="HistogramEqualization_Click"/>
                 <Separator/>
+                <MenuItem Header="Add..." x:Name="Add" Click="Add_Click"/>
+                <MenuItem Header="Subtract..." x:Name="Subtract" Click="Subtract_Click"/>
                 <MenuItem Header="NOR - negation" x:Name="NOR" Click="Negation_Click"/>
                 <Separator/>
                 <MenuItem Header="Posterize" x:Name="Posterize" Click="Posterize_Click"/>

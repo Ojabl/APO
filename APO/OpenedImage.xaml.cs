@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,10 +15,14 @@ namespace APO
     public partial class OpenedImage : Window
     {
         public Image image;
+
+        #region plot profile setup
+
         public bool drawPlotProfileLine = false;
-        
         private Point PlotProfilestartPoint;
         private Point PlotProfileendPoint;
+
+        #endregion
 
         public OpenedImage()
         {
@@ -51,6 +56,9 @@ namespace APO
                 duplicatedImageWindow.Show();
             }
         }
+
+        #region Image processing operations
+
         private void Grayscale_Click(object sender, RoutedEventArgs e)
         {
             this.imageSquare.Source = Lab1.ConvertToGrayscale().ToBitmapSource(); 
@@ -172,8 +180,9 @@ namespace APO
             wpfPlot.Refresh();
         }
 
+        #endregion
 
-        #region plot profile line drawing
+        #region Plot profile line drawing
         private void PlotProfile_Click(object sender, EventArgs e)
         {
             drawPlotProfileLine = true;
@@ -216,6 +225,7 @@ namespace APO
         }
         #endregion
 
+        #region Histogram operations
 
         private void HistogramStretch_Click(object sender, RoutedEventArgs e)
         {
@@ -226,17 +236,29 @@ namespace APO
         {
             this.imageSquare.Source = Lab2.Equalization(MainWindow.imgInput).ToBitmapSource();
         }
-        
+
+        #endregion
+
+        #region Mathematical operations
+
         private void Negation_Click(object sender, RoutedEventArgs e)
         {
             this.imageSquare.Source = Lab2.InvertColors(imageSquare.Source as BitmapSource);
         }
-        
-        private void Posterize_Click(object sender, RoutedEventArgs e)
+
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
-            PosterizeInputValuesWindow posterizeWindow = new PosterizeInputValuesWindow();
-            posterizeWindow.Show();
+            InputAddValueWindow inputAddValueWindow = new InputAddValueWindow();
+            inputAddValueWindow.Show();
         }
+
+        private void Subtract_Click(object sender, RoutedEventArgs e)
+        {
+            InputSubValueWindow inputSubValueWindow = new InputSubValueWindow();
+            inputSubValueWindow.Show();
+        }
+
+        #endregion
 
         #region Neighbourhood operations
         private void GaussianBlur_Click(object sender, RoutedEventArgs e)
@@ -267,13 +289,16 @@ namespace APO
             SelectLaplassianMaskWindow selectLaplassianMaskWindow = new SelectLaplassianMaskWindow();
             selectLaplassianMaskWindow.Show();
         }
-        #endregion
-
+        
         private void CustomConvolutionMask_Click(object sender, RoutedEventArgs e)
         {
             CustomConvolutionMask customConvolutionMask = new CustomConvolutionMask();
             customConvolutionMask.Show();
         }
+
+        #endregion
+
+        #region Median filter
 
         private void MedianFilter3x3_Click(object sender, RoutedEventArgs e)
         {
@@ -287,5 +312,15 @@ namespace APO
         {
             this.imageSquare.Source = Lab3.MedianFilter(MainWindow.imgInput, 7).ToBitmapSource();
         }
+
+        #endregion
+
+        private void Posterize_Click(object sender, RoutedEventArgs e)
+        {
+            PosterizeInputValuesWindow posterizeWindow = new PosterizeInputValuesWindow();
+            posterizeWindow.Show();
+        }
+
+        
     }
 }

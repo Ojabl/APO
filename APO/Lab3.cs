@@ -15,6 +15,7 @@ namespace APO
             var outputImage = inputImage.SmoothGaussian(kernelSize, kernelSize, sigma, sigma);
             return outputImage;
         }
+
         public static Image<Gray, byte> SobelEdgeDetection(Image<Bgr, byte> inputImage)
         {
             var grayImage = inputImage.Convert<Gray, byte>();
@@ -119,5 +120,51 @@ namespace APO
             Image<Bgr,byte> output = input.SmoothMedian(kernelSize);
             return output;
         }
+
+        #region Mathematical operations
+
+        public static Image<Bgr,byte> MathAdd(Image<Bgr, byte> input, int valueToAdd)
+        {
+            Image<Bgr,byte> output = input.CopyBlank();
+
+            for(int y = 0; y < input.Height; y++)
+            {
+                for(int x = 0; x < input.Width; x++)
+                {
+                    Bgr pixel = input[x,y];
+                    Bgr newPixel = new Bgr();
+
+                    newPixel.Blue = (byte)(((int)(pixel.Blue + valueToAdd) > 255) ? 255 : (pixel.Blue + valueToAdd));
+                    newPixel.Green = (byte)(((int)(pixel.Green + valueToAdd) > 255) ? 255 : (pixel.Green + valueToAdd));
+                    newPixel.Red = (byte)(((int)(pixel.Red + valueToAdd) > 255) ? 255 : (pixel.Red + valueToAdd));
+
+                    output[x,y] = newPixel;
+                }
+            }
+            return output;
+        }
+
+        public static Image<Bgr, byte> MathSub(Image<Bgr, byte> input, int valueToSubtract)
+        {
+            Image<Bgr, byte> output = input.CopyBlank();
+
+            for (int y = 0; y < input.Height; y++)
+            {
+                for (int x = 0; x < input.Width; x++)
+                {
+                    Bgr pixel = input[x, y];
+                    Bgr newPixel = new Bgr();
+
+                    newPixel.Blue = (byte)(((int)(pixel.Blue - valueToSubtract) < 0) ? 0 : (pixel.Blue + valueToSubtract));
+                    newPixel.Green = (byte)(((int)(pixel.Green - valueToSubtract) < 0) ? 0 : (pixel.Green + valueToSubtract));
+                    newPixel.Red = (byte)(((int)(pixel.Red - valueToSubtract) < 0) ? 0 : (pixel.Red + valueToSubtract));
+
+                    output[x, y] = newPixel;
+                }
+            }
+            return output;
+        }
+
+        #endregion 
     }
 }
