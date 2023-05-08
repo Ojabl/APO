@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using APO_Projekt_1;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using ScottPlot;
@@ -269,5 +268,11 @@ namespace APO
             selectLaplassianMaskWindow.Show();
         }
         #endregion
+
+        private void CustomConvolutionMask_Click(object sender, RoutedEventArgs e)
+        {
+            CustomConvolutionMask customConvolutionMask = new CustomConvolutionMask();
+            customConvolutionMask.Show();
+        }
     }
 }

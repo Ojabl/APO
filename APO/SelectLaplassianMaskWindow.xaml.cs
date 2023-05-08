@@ -1,5 +1,4 @@
-﻿using APO_Projekt_1;
-using Emgu.CV;
+﻿using Emgu.CV;
 using System;
 using System.Collections.Generic;
 using System.Linq;

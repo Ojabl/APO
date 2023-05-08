@@ -5,9 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using APO;
 
-namespace APO_Projekt_1
+namespace APO
 {
     class Lab3
     {
@@ -93,6 +92,26 @@ namespace APO_Projekt_1
             return result;
         }
 
+        internal static Image<Bgr,byte> ApplyCustomMask(Image<Bgr, byte> inputImage, int[,] customMask)
+        {
+            Matrix<float> floatMask = new Matrix<float>(3, 3);
 
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    floatMask[i, j] = customMask[i, j];
+                }
+            }
+
+            Mat kernel = floatMask.Mat;
+
+            var result = inputImage.CopyBlank();
+            CvInvoke.Filter2D(inputImage, result, kernel, new System.Drawing.Point(-1, -1));
+
+            MainWindow.imgInput = inputImage;
+
+            return result;
+        }
     }
 }

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="OpenedImage" Height="500" Width="800" Activated="Window_Activated">
+        Title="OpenedImage" Height="509" Width="505" Activated="Window_Activated">
     <Grid>
         <Menu>
             <MenuItem Header="Image">
@@ -41,6 +41,7 @@
                     <MenuItem Header="Laplassian Sharpening" x:Name="LaplassianSharpening" Click="LaplassianSharpening_Click"/>
                     <Separator/>
                     <MenuItem Header="Laplassian Mask" x:Name="LaplassianMask" Click="LaplassianMask_Click"/>
+                    <MenuItem Header="Insert custom convolution mask" x:Name="CustomConvolutionMask" Click="CustomConvolutionMask_Click"/>
                 </MenuItem>
             </MenuItem>
         </Menu>
