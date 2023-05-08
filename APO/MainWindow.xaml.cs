@@ -28,6 +28,8 @@ namespace APO
             InitializeComponent();
         }
 
+        #region File
+
         private void OpenImageMenuItem_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -45,6 +47,8 @@ namespace APO
             }
         }
 
+        #endregion
+
         private void info_Click(object sender, RoutedEventArgs e)
         {
             Info info = new Info();
@@ -53,11 +57,58 @@ namespace APO
 
         #region Operations
 
+        public enum OperationType
+        {
+            Blend,
+            AND,
+            OR,
+            XOR
+        }
+
+        #region Math operations
+
         private void Blend_Click(object sender, RoutedEventArgs e)
         {
-            BlendTwoImagesWindow blendWindow = new BlendTwoImagesWindow();
+            operationType = OperationType.Blend;
+
+            OperationTypesTwoImagesWindow blendWindow = new OperationTypesTwoImagesWindow();
             blendWindow.Show();
         }
+
+        #region Bitwise operations
+
+        
+        public static OperationType operationType;
+
+        private void AND_Click(object sender, RoutedEventArgs e)
+        {
+            operationType = OperationType.AND;
+
+            OperationTypesTwoImagesWindow bitwiseAND = new OperationTypesTwoImagesWindow();
+            bitwiseAND.Show();
+        }
+
+        private void OR_Click(object sender, RoutedEventArgs e)
+        {
+            operationType = OperationType.OR;
+
+
+            OperationTypesTwoImagesWindow bitwiseOR = new OperationTypesTwoImagesWindow();
+            bitwiseOR.Show();
+        }
+
+        private void XOR_Click(object sender, RoutedEventArgs e)
+        {
+            operationType = OperationType.XOR;
+
+
+            OperationTypesTwoImagesWindow bitwiseXOR = new OperationTypesTwoImagesWindow();
+            bitwiseXOR.Show();
+        }
+
+        #endregion
+
+        #endregion
 
         #endregion
     }

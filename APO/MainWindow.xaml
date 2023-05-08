@@ -15,6 +15,11 @@
             <MenuItem x:Name="Operations" Header="Operations">
                 <MenuItem x:Name="Math" Header="Math">
                     <MenuItem x:Name="Blend" Header="Blend" Click="Blend_Click"/>
+                    <MenuItem x:Name="OperationTypes" Header="Bitwise Operations">
+                        <MenuItem x:Name="AND" Header="AND" Click="AND_Click"/>
+                        <MenuItem x:Name="OR" Header="OR" Click="OR_Click"/>
+                        <MenuItem x:Name="XOR" Header="XOR" Click="XOR_Click"/>
+                    </MenuItem>
                 </MenuItem>
             </MenuItem>
         </Menu>

@@ -41,15 +41,6 @@ namespace APO
                 {
                     Image<Bgr,byte> outputImage = Lab3.BlendImages(firstImage, secondImage);
 
-                    OpenedImage blendedImages = new OpenedImage()
-                    {
-                        imageSquare = { Source = outputImage.ToBitmapSource() },
-                        Title = "Blended images",
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen
-                    };
-
-                    blendedImages.Show();
-
                     this.Close();
                 }
                 else

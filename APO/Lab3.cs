@@ -172,9 +172,6 @@ namespace APO
             return outputImage;
         }
 
-        //AND
-        //OR
-        //XOR
 
         #endregion 
     }
