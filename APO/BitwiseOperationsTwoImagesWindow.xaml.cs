@@ -1,16 +1,20 @@
-﻿using Emgu.CV.Structure;
-using Emgu.CV;
-using System.Windows;
+﻿using Emgu.CV;
+using Emgu.CV.Structure;
 using Microsoft.Win32;
-using System;
+using System.Windows;
 
 namespace APO
 {
     public partial class OperationTypesTwoImagesWindow : Window
     {
-        Image<Bgr, byte> firstImage = null;
-        Image<Bgr, byte> secondImage = null;
+        Image<Bgr, byte>? firstImage = null;
+        Image<Bgr, byte>? secondImage = null;
         MainWindow.OperationType operation;
+
+        OpenFileDialog ofd = new()
+        {
+            Filter = "Image Files (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp"
+        };
 
         public OperationTypesTwoImagesWindow()
         {
@@ -19,20 +23,24 @@ namespace APO
 
         private void BtnFirstImage_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp";
-
             if (ofd.ShowDialog() == true) firstImage = new Image<Bgr, byte>(ofd.FileName);
             else MessageBox.Show("Pick correct image!\nCorrect file extensions:\n.png\n.jpg\n.jpeg\n.bmp", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            if (firstImage != null)
+            {
+                ImgLeft.Source = firstImage.ToBitmapSource();
+            }
         }
 
         private void BtnSecondImage_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.bmp)|*.png;*.jpg;*.jpeg;*.bmp";
-
             if (ofd.ShowDialog() == true) secondImage = new Image<Bgr, byte>(ofd.FileName);
             else MessageBox.Show("Choose correct image!\nCorrect file extensions:\n.png\n.jpg\n.jpeg\n.bmp", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            if (secondImage != null)
+            {
+                ImgRight.Source = secondImage.ToBitmapSource();
+            }
         }
 
         private void BtnApply_Click(object sender, RoutedEventArgs e)
@@ -41,7 +49,7 @@ namespace APO
             {
                 if (firstImage.Size == secondImage.Size)
                 {
-                    Image<Bgr, byte> resultImage = new Image<Bgr, byte>(firstImage.Size);
+                    Image<Bgr, byte> resultImage = new(firstImage.Size);
                     operation = MainWindow.operationType;
 
                     switch (operation)
@@ -51,7 +59,7 @@ namespace APO
                             break;
 
                         case MainWindow.OperationType.AND:
-                            CvInvoke.BitwiseAnd(firstImage,secondImage,resultImage);
+                            CvInvoke.BitwiseAnd(firstImage, secondImage, resultImage);
                             break;
 
                         case MainWindow.OperationType.OR:
@@ -62,7 +70,6 @@ namespace APO
                             CvInvoke.BitwiseXor(firstImage, secondImage, resultImage);
                             break;
                     }
-
 
                     OpenedImage imageAfterOperation = new OpenedImage()
                     {

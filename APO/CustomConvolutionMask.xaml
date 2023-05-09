@@ -8,7 +8,6 @@
         Title="CustomConvolutionMask" Height="250" Width="400">
     <Grid>
         <Label Content="Insert your custom convolution mask:" HorizontalAlignment="Center" Margin="0,22,0,0" VerticalAlignment="Top" Width="246" FontSize="14"/>
-
         <TextBox x:Name="TbCustomMatrixA1" HorizontalAlignment="Left" Margin="108,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
         <TextBox x:Name="TbCustomMatrixA2" HorizontalAlignment="Left" Margin="170,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
         <TextBox x:Name="TbCustomMatrixA3" HorizontalAlignment="Left" Margin="231,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>

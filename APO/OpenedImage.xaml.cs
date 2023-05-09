@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -241,6 +240,13 @@ namespace APO
 
         #region Mathematical operations
 
+        public enum MathOperation
+        {
+            Addition,
+            Subtraction,
+        }
+        public static MathOperation mathOperation;
+
         private void Negation_Click(object sender, RoutedEventArgs e)
         {
             this.imageSquare.Source = Lab2.InvertColors(imageSquare.Source as BitmapSource);
@@ -248,14 +254,18 @@ namespace APO
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            InputAddValueWindow inputAddValueWindow = new InputAddValueWindow();
+            mathOperation = MathOperation.Addition;
+
+            InputSingleValueWindow inputAddValueWindow = new InputSingleValueWindow();
             inputAddValueWindow.Show();
         }
 
         private void Subtract_Click(object sender, RoutedEventArgs e)
         {
-            InputSubValueWindow inputSubValueWindow = new InputSubValueWindow();
-            inputSubValueWindow.Show();
+            mathOperation = MathOperation.Subtraction;
+
+            InputSingleValueWindow inputSubtractValueWindow = new InputSingleValueWindow();
+            inputSubtractValueWindow.Show();
         }
 
         #endregion

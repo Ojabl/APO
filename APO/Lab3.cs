@@ -119,7 +119,7 @@ namespace APO
 
         #region Mathematical operations
 
-        public static Image<Bgr,byte> MathAdd(Image<Bgr, byte> input, int valueToAdd)
+        public static Image<Bgr,byte> MathAddition(Image<Bgr, byte> input, int valueToAdd)
         {
             Image<Bgr,byte> output = input.CopyBlank();
 
@@ -140,7 +140,7 @@ namespace APO
             return output;
         }
 
-        public static Image<Bgr, byte> MathSub(Image<Bgr, byte> input, int valueToSubtract)
+        public static Image<Bgr, byte> MathSubtraction(Image<Bgr, byte> input, int valueToSubtract)
         {
             Image<Bgr, byte> output = input.CopyBlank();
 
@@ -151,9 +151,9 @@ namespace APO
                     Bgr pixel = input[x, y];
                     Bgr newPixel = new Bgr();
 
-                    newPixel.Blue = (byte)(((int)(pixel.Blue - valueToSubtract) < 0) ? 0 : (pixel.Blue + valueToSubtract));
-                    newPixel.Green = (byte)(((int)(pixel.Green - valueToSubtract) < 0) ? 0 : (pixel.Green + valueToSubtract));
-                    newPixel.Red = (byte)(((int)(pixel.Red - valueToSubtract) < 0) ? 0 : (pixel.Red + valueToSubtract));
+                    newPixel.Blue = (byte)(((int)(pixel.Blue - valueToSubtract) < 0) ? 0 : (pixel.Blue - valueToSubtract));
+                    newPixel.Green = (byte)(((int)(pixel.Green - valueToSubtract) < 0) ? 0 : (pixel.Green - valueToSubtract));
+                    newPixel.Red = (byte)(((int)(pixel.Red - valueToSubtract) < 0) ? 0 : (pixel.Red - valueToSubtract));
 
                     output[x, y] = newPixel;
                 }
