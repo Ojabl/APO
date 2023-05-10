@@ -8,7 +8,7 @@
         ResizeMode="NoResize">
     <Grid>
         <TextBlock HorizontalAlignment="Center" Margin="0,25,0,0" TextWrapping="Wrap" Text="Insert value:" VerticalAlignment="Top" Width="66"/>
-        <Button x:Name="BtnApply" Content="Add" HorizontalAlignment="Center" Margin="0,112,0,0" VerticalAlignment="Top" Width="65" Click="BtnApply_Click"/>
+        <Button x:Name="BtnApply" Content="Apply" HorizontalAlignment="Center" Margin="0,112,0,0" VerticalAlignment="Top" Width="65" Click="BtnApply_Click"/>
         <TextBox x:Name="TbValue" HorizontalAlignment="Center" Margin="0,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="90"/>
     </Grid>
 </Window>

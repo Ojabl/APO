@@ -9,30 +9,17 @@ namespace APO
 {
     class Lab2
     {
-        public static BitmapSource InvertColors(BitmapSource source)
+        public static Image<Bgr, byte> InvertColors(Image<Bgr, byte> input)
         {
-            int width = source.PixelWidth;
-            int height = source.PixelHeight;
+            Image<Gray, byte> grayscaleImage = input.Convert<Gray, byte>().Not();
 
-            FormatConvertedBitmap grayscaleImage = new FormatConvertedBitmap();
-            grayscaleImage.BeginInit();
-            grayscaleImage.Source = source;
-            grayscaleImage.DestinationFormat = PixelFormats.Gray8;
-            grayscaleImage.EndInit();
+            Image<Bgr, byte> output = grayscaleImage.Convert<Bgr, byte>();
+            MainWindow.imgInput = output;
 
-            int bytesPerPixel = 1;
-            int stride = width * bytesPerPixel;
-            byte[] pixelData = new byte[height * stride];
-
-            grayscaleImage.CopyPixels(pixelData, stride, 0);
-
-            for (int i = 0; i < pixelData.Length; i++)
-            {
-                pixelData[i] = (byte)(255 - pixelData[i]);
-            }
-
-            return BitmapSource.Create(width, height, grayscaleImage.DpiX, grayscaleImage.DpiY, PixelFormats.Gray8, null, pixelData, stride);
+            return output;
         }
+
+        #region Histogram operations
 
         public static Image<Bgr, byte> Equalization(Image<Bgr, byte> image)
         {
@@ -85,6 +72,8 @@ namespace APO
 
             return outputImage;
         }
+
+        #endregion
 
         public static Image<Bgr,byte> PosterizeImage(Image<Bgr,byte> inputImage, int graylevels)
         {

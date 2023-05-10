@@ -14,6 +14,7 @@ namespace APO
     public partial class OpenedImage : Window
     {
         public Image image;
+        public static Image<Gray, byte> binarizedImage;
 
         #region plot profile setup
 
@@ -249,7 +250,7 @@ namespace APO
 
         private void Negation_Click(object sender, RoutedEventArgs e)
         {
-            this.imageSquare.Source = Lab2.InvertColors(imageSquare.Source as BitmapSource);
+            this.imageSquare.Source = Lab2.InvertColors(MainWindow.imgInput).ToBitmapSource(); 
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
@@ -271,6 +272,7 @@ namespace APO
         #endregion
 
         #region Neighbourhood operations
+
         private void GaussianBlur_Click(object sender, RoutedEventArgs e)
         {
             this.imageSquare.Source = Lab3.GaussianBlur(MainWindow.imgInput, 5, 1.0).ToBitmapSource();
@@ -280,6 +282,20 @@ namespace APO
             int maskType = 1; // Change this value to 1, 2, or 3 for different Laplacian masks
             this.imageSquare.Source = Lab3.ApplyLaplassianMask(MainWindow.imgInput, maskType).ToBitmapSource();
         }
+
+        private void LaplassianMask_Click(object sender, RoutedEventArgs e)
+        {
+            SelectLaplassianMaskWindow selectLaplassianMaskWindow = new SelectLaplassianMaskWindow();
+            selectLaplassianMaskWindow.Show();
+        }
+        
+        private void CustomConvolutionMask_Click(object sender, RoutedEventArgs e)
+        {
+            CustomConvolutionMask customConvolutionMask = new CustomConvolutionMask();
+            customConvolutionMask.Show();
+        }
+
+        #region Edge detection
 
         private void SobelEdgeDetection_Click(object sender, RoutedEventArgs e)
         {
@@ -294,17 +310,7 @@ namespace APO
             this.imageSquare.Source = Lab3.CannyEdgeDetection(MainWindow.imgInput, 50, 150).ToBitmapSource();
         }
 
-        private void LaplassianMask_Click(object sender, RoutedEventArgs e)
-        {
-            SelectLaplassianMaskWindow selectLaplassianMaskWindow = new SelectLaplassianMaskWindow();
-            selectLaplassianMaskWindow.Show();
-        }
-        
-        private void CustomConvolutionMask_Click(object sender, RoutedEventArgs e)
-        {
-            CustomConvolutionMask customConvolutionMask = new CustomConvolutionMask();
-            customConvolutionMask.Show();
-        }
+        #endregion
 
         #endregion
 
@@ -331,6 +337,93 @@ namespace APO
             posterizeWindow.Show();
         }
 
-        
+        #region Morphological operations
+
+        private bool IsBinarized = false;
+        public enum StructurizingElement { Square, Diamond }
+        StructurizingElement structurizingElement;
+
+        private void Binarization_Click(object sender, RoutedEventArgs e)
+        {
+            IsBinarized = true;
+
+            this.imageSquare.Source = Lab4.Binarization(MainWindow.imgInput).ToBitmapSource();
+        }
+
+        private void ErosionDiamond_Click(object sender, RoutedEventArgs e)
+        {
+            CheckIfBinarized();
+            structurizingElement = StructurizingElement.Diamond;
+
+            this.imageSquare.Source = Lab4.Erosion(MainWindow.imgInput, structurizingElement).ToBitmapSource();
+        }
+
+        private void ErosionSquare_Click(object sender, RoutedEventArgs e)
+        {
+            CheckIfBinarized();
+            structurizingElement = StructurizingElement.Square;
+
+            this.imageSquare.Source = Lab4.Erosion(MainWindow.imgInput, structurizingElement).ToBitmapSource();
+        }
+
+        private void DilationDiamond_Click(object sender, RoutedEventArgs e)
+        {
+            CheckIfBinarized();
+            structurizingElement = StructurizingElement.Diamond;
+
+            this.imageSquare.Source = Lab4.Dilation(MainWindow.imgInput, structurizingElement).ToBitmapSource();
+        }
+
+        private void DilationSquare_Click(object sender, RoutedEventArgs e)
+        {
+            CheckIfBinarized();
+            structurizingElement = StructurizingElement.Square;
+
+            this.imageSquare.Source = Lab4.Dilation(MainWindow.imgInput, structurizingElement).ToBitmapSource();
+        }
+
+        private void OpenDiamond_Click(object sender, RoutedEventArgs e)
+        {
+            CheckIfBinarized();
+            structurizingElement = StructurizingElement.Diamond;
+        }
+
+        private void OpenSquare_Click(object sender, RoutedEventArgs e)
+        {
+            CheckIfBinarized();
+            structurizingElement = StructurizingElement.Square;
+        }
+
+        private void CloseDiamond_Click(object sender, RoutedEventArgs e)
+        {
+            CheckIfBinarized();
+            structurizingElement = StructurizingElement.Diamond;
+        }
+
+        private void CloseSquare_Click(object sender, RoutedEventArgs e)
+        {
+            CheckIfBinarized();
+            structurizingElement = StructurizingElement.Square;
+        }
+
+        private void Skeletonize_Click(object sender, RoutedEventArgs e)
+        {
+            CheckIfBinarized();
+
+            //this.imageSquare.Source = Lab4.Skeletonize(MainWindow.imgInput).ToBitmapSource();
+        }
+
+        private bool CheckIfBinarized()
+        {
+            if (IsBinarized)
+                return true;
+            else
+            {
+                MessageBox.Show("Please binarize the image first!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+
+        #endregion
     }
 }

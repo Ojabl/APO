@@ -6,33 +6,12 @@ namespace APO
 {
     class Lab3
     {
+        #region Neighbourhood operations
+
         public static Image<Bgr, byte> GaussianBlur(Image<Bgr, byte> inputImage, int kernelSize, double sigma)
         {
             var outputImage = inputImage.SmoothGaussian(kernelSize, kernelSize, sigma, sigma);
             return outputImage;
-        }
-
-        public static Image<Gray, byte> SobelEdgeDetection(Image<Bgr, byte> inputImage)
-        {
-            var grayImage = inputImage.Convert<Gray, byte>();
-            var sobelImage = grayImage.Sobel(0, 1, 3).Add(grayImage.Sobel(1, 0, 3)).AbsDiff(new Gray(0.0));
-            var sobelImageByte = sobelImage.Convert<Gray, byte>();
-            return sobelImageByte;
-        }
-
-        public static Image<Gray, byte> LaplacianEdgeDetection(Image<Bgr, byte> inputImage)
-        {
-            var grayImage = inputImage.Convert<Gray, byte>();
-            var laplacianImage = grayImage.Laplace(3);
-            var laplacianImageByte = laplacianImage.Convert<Gray, byte>();
-            return laplacianImageByte;
-        }
-
-        public static Image<Gray, byte> CannyEdgeDetection(Image<Bgr, byte> inputImage, double threshold1, double threshold2)
-        {
-            var grayImage = inputImage.Convert<Gray, byte>();
-            var cannyImage = grayImage.Canny(threshold1, threshold2);
-            return cannyImage;
         }
 
         public static Image<Bgr, byte> ApplyLaplassianMask(Image<Bgr, byte> inputImage, int maskType)
@@ -111,6 +90,35 @@ namespace APO
             return result;
         }
 
+        #region Edge detection
+
+        public static Image<Gray, byte> SobelEdgeDetection(Image<Bgr, byte> inputImage)
+        {
+            var grayImage = inputImage.Convert<Gray, byte>();
+            var sobelImage = grayImage.Sobel(0, 1, 3).Add(grayImage.Sobel(1, 0, 3)).AbsDiff(new Gray(0.0));
+            var sobelImageByte = sobelImage.Convert<Gray, byte>();
+            return sobelImageByte;
+        }
+
+        public static Image<Gray, byte> LaplacianEdgeDetection(Image<Bgr, byte> inputImage)
+        {
+            var grayImage = inputImage.Convert<Gray, byte>();
+            var laplacianImage = grayImage.Laplace(3);
+            var laplacianImageByte = laplacianImage.Convert<Gray, byte>();
+            return laplacianImageByte;
+        }
+
+        public static Image<Gray, byte> CannyEdgeDetection(Image<Bgr, byte> inputImage, double threshold1, double threshold2)
+        {
+            var grayImage = inputImage.Convert<Gray, byte>();
+            var cannyImage = grayImage.Canny(threshold1, threshold2);
+            return cannyImage;
+        }
+
+        #endregion
+
+        #endregion
+
         public static Image<Bgr,byte> MedianFilter(Image<Bgr,byte> input, int kernelSize)
         {
             Image<Bgr,byte> output = input.SmoothMedian(kernelSize);
@@ -119,7 +127,7 @@ namespace APO
 
         #region Mathematical operations
 
-        public static Image<Bgr,byte> MathAddition(Image<Bgr, byte> input, int valueToAdd)
+        public static Image<Bgr,byte> MathAddition(Image<Bgr, byte> input, int valueToAdd) 
         {
             Image<Bgr,byte> output = input.CopyBlank();
 
@@ -127,14 +135,14 @@ namespace APO
             {
                 for(int x = 0; x < input.Width; x++)
                 {
-                    Bgr pixel = input[x,y];
+                    Bgr pixel = input[y,x];
                     Bgr newPixel = new Bgr();
 
                     newPixel.Blue = (byte)(((int)(pixel.Blue + valueToAdd) > 255) ? 255 : (pixel.Blue + valueToAdd));
                     newPixel.Green = (byte)(((int)(pixel.Green + valueToAdd) > 255) ? 255 : (pixel.Green + valueToAdd));
                     newPixel.Red = (byte)(((int)(pixel.Red + valueToAdd) > 255) ? 255 : (pixel.Red + valueToAdd));
 
-                    output[x,y] = newPixel;
+                    output[y, x] = newPixel;
                 }
             }
             return output;
@@ -148,18 +156,18 @@ namespace APO
             {
                 for (int x = 0; x < input.Width; x++)
                 {
-                    Bgr pixel = input[x, y];
+                    Bgr pixel = input[y,x];
                     Bgr newPixel = new Bgr();
 
                     newPixel.Blue = (byte)(((int)(pixel.Blue - valueToSubtract) < 0) ? 0 : (pixel.Blue - valueToSubtract));
                     newPixel.Green = (byte)(((int)(pixel.Green - valueToSubtract) < 0) ? 0 : (pixel.Green - valueToSubtract));
                     newPixel.Red = (byte)(((int)(pixel.Red - valueToSubtract) < 0) ? 0 : (pixel.Red - valueToSubtract));
 
-                    output[x, y] = newPixel;
+                    output[y, x] = newPixel;
                 }
             }
             return output;
-        } // TODO: check if it works
+        } 
 
         public static Image<Bgr,byte> BlendImages(Image<Bgr,byte> firstImage, Image<Bgr, byte> secondImage)
         {
@@ -171,8 +179,7 @@ namespace APO
 
             return outputImage;
         }
-
-
+        
         #endregion 
     }
 }
