@@ -119,12 +119,6 @@ namespace APO
 
         #endregion
 
-        public static Image<Bgr,byte> MedianFilter(Image<Bgr,byte> input, int kernelSize)
-        {
-            Image<Bgr,byte> output = input.SmoothMedian(kernelSize);
-            return output;
-        }
-
         #region Mathematical operations
 
         public static Image<Bgr,byte> MathAddition(Image<Bgr, byte> input, int valueToAdd) 
@@ -179,7 +173,13 @@ namespace APO
 
             return outputImage;
         }
-        
-        #endregion 
+
+        #endregion
+
+        public static Image<Bgr, byte> MedianFilter(Image<Bgr, byte> input, int kernelSize)
+        {
+            Image<Bgr, byte> output = input.SmoothMedian(kernelSize);
+            return output;
+        }
     }
 }

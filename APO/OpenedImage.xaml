@@ -74,7 +74,10 @@
                         <MenuItem Header="Square" x:Name="CloseSquare" Click="CloseSquare_Click"/>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Header="Skeletonize" x:Name="Skeletonize" Click="Skeletonize_Click"/>
+                    <MenuItem Header="Skeletonize" x:Name="Skeletonize">
+                        <MenuItem Header="Diamond" x:Name="SkeletonizeDiamond" Click="SkeletonizeDiamond_Click"/>
+                        <MenuItem Header="Square" x:Name="SkeletonizeSquare" Click="SkeletonizeSquare_Click"/>
+                    </MenuItem>
                 </MenuItem>
             </MenuItem>
         </Menu>

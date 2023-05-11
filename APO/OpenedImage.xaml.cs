@@ -1,20 +1,19 @@
-﻿using System;
+﻿using Emgu.CV;
+using Emgu.CV.Structure;
+using ScottPlot;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using Emgu.CV;
-using Emgu.CV.Structure;
-using ScottPlot;
 
 namespace APO
 {
     public partial class OpenedImage : Window
     {
         public Image image;
-        public static Image<Gray, byte> binarizedImage;
 
         #region plot profile setup
 
@@ -33,7 +32,7 @@ namespace APO
             imageSquare.MouseLeftButtonDown += ImageSquare_MouseLeftButtonDown;
             imageSquare.MouseLeftButtonUp += ImageSquare_MouseLeftButtonUp;
             imageSquare.MouseMove += ImageSquare_MouseMove;
-            
+
             #endregion
         }
 
@@ -44,14 +43,17 @@ namespace APO
 
         private void DuplicateWindow_Click(object sender, RoutedEventArgs e)
         {
-            if(MainWindow.imageWindow != null)
+            if (MainWindow.imageWindow != null)
             {
                 BitmapSource currentImage = imageSquare.Source as BitmapSource;
 
                 OpenedImage duplicatedImageWindow = new OpenedImage
                 {
-                    imageSquare = { Source = currentImage},
-                    Title = "Duplicated Image - " + System.IO.Path.GetFileName(MainWindow.imageWindow.Title)
+                    imageSquare = { Source = currentImage },
+                    Title = "Duplicated Image - " + System.IO.Path.GetFileName(MainWindow.imageWindow.Title),
+                    IsBinarized = this.IsBinarized,
+                    structurizingElement = this.structurizingElement,
+
                 };
                 duplicatedImageWindow.Show();
             }
@@ -61,7 +63,7 @@ namespace APO
 
         private void Grayscale_Click(object sender, RoutedEventArgs e)
         {
-            this.imageSquare.Source = Lab1.ConvertToGrayscale().ToBitmapSource(); 
+            this.imageSquare.Source = Lab1.ConvertToGrayscale().ToBitmapSource();
         }
         private void HSV_Click(object sender, RoutedEventArgs e)
         {
@@ -83,7 +85,7 @@ namespace APO
                 {
                     bitmapSources.Add(mat.ToBitmapSource());
                 }
-                
+
                 if (bitmapSources.Count >= 3)
                 {
                     OpenedImage channel1Window = new OpenedImage
@@ -143,7 +145,7 @@ namespace APO
             {
                 for (int y = 0; y < MainWindow.imgInput.Width; y++)
                 {
-                    Bgr pixel = MainWindow.imgInput[x,y];
+                    Bgr pixel = MainWindow.imgInput[x, y];
                     int gray = (int)Math.Round(((pixel.Red * 0.299) + (pixel.Green * 0.587) + (pixel.Blue * 0.114)));
                     histogramValues[gray]++;
                 }
@@ -250,7 +252,7 @@ namespace APO
 
         private void Negation_Click(object sender, RoutedEventArgs e)
         {
-            this.imageSquare.Source = Lab2.InvertColors(MainWindow.imgInput).ToBitmapSource(); 
+            this.imageSquare.Source = Lab2.InvertColors(MainWindow.imgInput).ToBitmapSource();
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
@@ -288,7 +290,7 @@ namespace APO
             SelectLaplassianMaskWindow selectLaplassianMaskWindow = new SelectLaplassianMaskWindow();
             selectLaplassianMaskWindow.Show();
         }
-        
+
         private void CustomConvolutionMask_Click(object sender, RoutedEventArgs e)
         {
             CustomConvolutionMask customConvolutionMask = new CustomConvolutionMask();
@@ -352,7 +354,7 @@ namespace APO
 
         private void ErosionDiamond_Click(object sender, RoutedEventArgs e)
         {
-            CheckIfBinarized();
+            if (!CheckIfBinarized()) return;
             structurizingElement = StructurizingElement.Diamond;
 
             this.imageSquare.Source = Lab4.Erosion(MainWindow.imgInput, structurizingElement).ToBitmapSource();
@@ -360,7 +362,7 @@ namespace APO
 
         private void ErosionSquare_Click(object sender, RoutedEventArgs e)
         {
-            CheckIfBinarized();
+            if (!CheckIfBinarized()) return;
             structurizingElement = StructurizingElement.Square;
 
             this.imageSquare.Source = Lab4.Erosion(MainWindow.imgInput, structurizingElement).ToBitmapSource();
@@ -368,7 +370,7 @@ namespace APO
 
         private void DilationDiamond_Click(object sender, RoutedEventArgs e)
         {
-            CheckIfBinarized();
+            if (!CheckIfBinarized()) return;
             structurizingElement = StructurizingElement.Diamond;
 
             this.imageSquare.Source = Lab4.Dilation(MainWindow.imgInput, structurizingElement).ToBitmapSource();
@@ -376,7 +378,7 @@ namespace APO
 
         private void DilationSquare_Click(object sender, RoutedEventArgs e)
         {
-            CheckIfBinarized();
+            if (!CheckIfBinarized()) return;
             structurizingElement = StructurizingElement.Square;
 
             this.imageSquare.Source = Lab4.Dilation(MainWindow.imgInput, structurizingElement).ToBitmapSource();
@@ -384,33 +386,50 @@ namespace APO
 
         private void OpenDiamond_Click(object sender, RoutedEventArgs e)
         {
-            CheckIfBinarized();
+            if (!CheckIfBinarized()) return;
             structurizingElement = StructurizingElement.Diamond;
+
+            this.imageSquare.Source = Lab4.Open(MainWindow.imgInput, structurizingElement).ToBitmapSource();
         }
 
         private void OpenSquare_Click(object sender, RoutedEventArgs e)
         {
-            CheckIfBinarized();
+            if (!CheckIfBinarized()) return;
             structurizingElement = StructurizingElement.Square;
+
+            this.imageSquare.Source = Lab4.Open(MainWindow.imgInput, structurizingElement).ToBitmapSource();
         }
 
         private void CloseDiamond_Click(object sender, RoutedEventArgs e)
         {
-            CheckIfBinarized();
+            if (!CheckIfBinarized()) return;
             structurizingElement = StructurizingElement.Diamond;
+
+            this.imageSquare.Source = Lab4.Close(MainWindow.imgInput, structurizingElement).ToBitmapSource();
         }
 
         private void CloseSquare_Click(object sender, RoutedEventArgs e)
         {
-            CheckIfBinarized();
+            if (!CheckIfBinarized()) return;
             structurizingElement = StructurizingElement.Square;
+
+            this.imageSquare.Source = Lab4.Close(MainWindow.imgInput, structurizingElement).ToBitmapSource();
         }
 
-        private void Skeletonize_Click(object sender, RoutedEventArgs e)
+        private void SkeletonizeSquare_Click(object sender, RoutedEventArgs e)
         {
-            CheckIfBinarized();
+            if (!CheckIfBinarized()) return;
+            structurizingElement = StructurizingElement.Square;
 
-            //this.imageSquare.Source = Lab4.Skeletonize(MainWindow.imgInput).ToBitmapSource();
+            this.imageSquare.Source = Lab4.Skeletonize(MainWindow.imgInput, structurizingElement).ToBitmapSource();
+        }
+
+        private void SkeletonizeDiamond_Click(object sender, RoutedEventArgs e)
+        {
+            if (!CheckIfBinarized()) return;
+            structurizingElement = StructurizingElement.Diamond;
+
+            this.imageSquare.Source = Lab4.Skeletonize(MainWindow.imgInput, structurizingElement).ToBitmapSource();
         }
 
         private bool CheckIfBinarized()
