@@ -1,0 +1,34 @@
+﻿<Window x:Class="APO.TwoStageFilteringWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Two Stage Filtering" Height="418" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Sharpening mask:" HorizontalAlignment="Left" Margin="142,39,0,0" VerticalAlignment="Top" Height="26" Width="107"/>
+
+        <RadioButton Content="" x:Name="RbtnHighSharpening" GroupName="Sharpening" HorizontalAlignment="Left" Margin="113,132,0,0" VerticalAlignment="Top" Width="14" Height="15"/>
+        <Image HorizontalAlignment="Left" x:Name="ImgHighSharpening"  Height="100" Margin="164,89,0,0" VerticalAlignment="Top" Width="100" Source="C:\Users\osaja\Desktop\mask2.png"/>
+        <RadioButton Content="" x:Name="RbtnLowSharpening" GroupName="Sharpening" HorizontalAlignment="Left" Margin="113,267,0,0" VerticalAlignment="Top" Width="14" Height="15"/>
+        <Image HorizontalAlignment="Left" x:Name="ImgLowSharpening" Height="100" Margin="164,228,0,0" VerticalAlignment="Top" Width="100" Source="C:\Users\osaja\Desktop\mask4.png"/>
+
+        <Label Content="Smoothing mask:" HorizontalAlignment="Left" Margin="139,38,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="114"/>
+
+        <RadioButton Content="" x:Name="RbtnHighSmoothing" GroupName="Smoothing" HorizontalAlignment="Left" Margin="111,130,0,0" VerticalAlignment="Top" Width="14" Grid.Column="1" Height="16"/>
+        <Image HorizontalAlignment="Left" x:Name="ImgHighSmoothing" Height="100" Margin="167,88,0,0" VerticalAlignment="Top" Width="100" Source="C:\Users\osaja\Desktop\mask1.png" Grid.Column="1"/>
+        <RadioButton Content="" x:Name="RbtnLowSmoothing" GroupName="Smoothing" HorizontalAlignment="Left" Margin="111,266,0,0" VerticalAlignment="Top" Width="14" Grid.Column="1" Height="14"/>
+        <Image HorizontalAlignment="Left" x:Name="ImgLowSmoothing" Height="100" Margin="167,228,0,0" VerticalAlignment="Top" Width="100" Source="C:\Users\osaja\Desktop\mask3.png" Grid.Column="1" />
+
+        <Button Content="Apply" x:Name="BtnApply" HorizontalAlignment="Left" Margin="343,0,0,0" VerticalAlignment="Center" Width="114" Click="BtnApply_Click" Grid.Row="1" Grid.ColumnSpan="2" Height="20"/>
+
+    </Grid>
+</Window>

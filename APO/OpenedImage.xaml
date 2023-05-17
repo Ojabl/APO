@@ -79,6 +79,10 @@
                         <MenuItem Header="Square" x:Name="SkeletonizeSquare" Click="SkeletonizeSquare_Click"/>
                     </MenuItem>
                 </MenuItem>
+                <Separator/>
+                <MenuItem Header="Filtering">
+                    <MenuItem Header="Two-stage filtering" x:Name="TwoStageFiltering" Click="TwoStageFiltering_Click"/>
+                </MenuItem>
             </MenuItem>
         </Menu>
         <Image x:Name="imageSquare" Margin="35,45,38,27"></Image>

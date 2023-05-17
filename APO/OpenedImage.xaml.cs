@@ -1,5 +1,6 @@
 ﻿using Emgu.CV;
 using Emgu.CV.Structure;
+using Emgu.CV.XImgproc;
 using ScottPlot;
 using System;
 using System.Collections.Generic;
@@ -441,6 +442,16 @@ namespace APO
                 MessageBox.Show("Please binarize the image first!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
+        }
+
+        #endregion
+
+        #region Filtering
+
+        private void TwoStageFiltering_Click(object sender, RoutedEventArgs e)
+        {
+            TwoStageFilteringWindow twoStageFilteringWindow = new TwoStageFilteringWindow();
+            twoStageFilteringWindow.Show();
         }
 
         #endregion

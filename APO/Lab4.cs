@@ -123,5 +123,40 @@ namespace APO
         #endregion
 
         #endregion
+
+        #region Two step filtering
+
+        public static Image<Gray, byte> TwoStepFiltering(Image<Gray, byte> inputImage, float[,] smoothingMask, float[,] sharpeningMask)
+        {
+            // Apply smoothing
+            ConvolutionKernelF smoothingKernel = new ConvolutionKernelF(smoothingMask);
+            Image<Gray, float> smoothedImg = inputImage.Convert<Gray, float>().Convolution(smoothingKernel);
+
+            // Apply sharpening
+            ConvolutionKernelF sharpeningKernel = new ConvolutionKernelF(sharpeningMask);
+            Image<Gray, float> sharpenedImg = smoothedImg.Convolution(sharpeningKernel);
+
+            // Calculate 5x5 mask
+            float[,] mask5x5 = new float[5, 5];
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    mask5x5[i, j] = smoothingMask[i / 2, j / 2] * sharpeningMask[i / 2, j / 2];
+                }
+            }
+
+            // Apply 5x5 mask
+            ConvolutionKernelF kernel5x5 = new ConvolutionKernelF(mask5x5);
+            Image<Gray, float> finalImg = inputImage.Convert<Gray, float>().Convolution(kernel5x5);
+
+            // Compare results
+            double diff = CvInvoke.Norm(sharpenedImg, finalImg, NormType.L2);
+            Console.WriteLine($"Difference between two-step filtering and 5x5 mask: {diff}");
+
+            return finalImg.Convert<Gray, byte>();
+        }
+
+        #endregion
     }
 }
